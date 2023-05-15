@@ -1,6 +1,5 @@
 package com.example.application.views.imagelist;
 
-import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.html.H2;
@@ -23,10 +22,15 @@ import com.vaadin.flow.theme.lumo.LumoUtility.MaxWidth;
 import com.vaadin.flow.theme.lumo.LumoUtility.Padding;
 import com.vaadin.flow.theme.lumo.LumoUtility.TextColor;
 
+import java.util.List;
+
 @PageTitle("Image List")
-@Route(value = "image-list", layout = MainLayout.class)
+//@Route(value = "image-list", layout = MainLayout.class)
 public class ImageListView extends Main implements HasComponents, HasStyle {
 
+    //private final ItemService itemService;
+
+   // private List<Item> = itemService.find
     private OrderedList imageContainer;
 
     public ImageListView() {

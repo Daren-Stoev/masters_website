@@ -3,21 +3,31 @@ package com.example.application.views;
 
 import com.example.application.components.appnav.AppNav;
 import com.example.application.components.appnav.AppNavItem;
+import com.example.application.data.entity.Users;
+import com.example.application.security.AuthService;
 import com.example.application.views.about.AboutView;
 import com.example.application.views.cardlist.CardListView;
 import com.example.application.views.checkoutform.CheckoutFormView;
 import com.example.application.views.empty.EmptyView;
 import com.example.application.views.helloworld.HelloWorldView;
 import com.example.application.views.imagelist.ImageListView;
+import com.example.application.views.itemlist.ItemListView;
+import com.example.application.views.login.LoginView;
 import com.example.application.views.masterdetail.MasterDetailView;
+import com.example.application.views.signup.SignUpView;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.html.Footer;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
+import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
 /**
@@ -25,9 +35,11 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
  */
 public class MainLayout extends AppLayout {
 
+    private final AuthService authService;
     private H2 viewTitle;
 
-    public MainLayout() {
+    public MainLayout(AuthService authService) {
+        this.authService = authService;
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -35,12 +47,20 @@ public class MainLayout extends AppLayout {
 
     private void addHeaderContent() {
         DrawerToggle toggle = new DrawerToggle();
+        /*H1 logo = new H1("Vaadin CRM");
         toggle.getElement().setAttribute("aria-label", "Menu toggle");
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);
+
+        header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+        header.expand(logo);
+        header.setWidth("100%");
+        header.addClassNames("py-0", "px-m");*/
+
 
         viewTitle = new H2();
         viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
 
-        addToNavbar(true, toggle, viewTitle);
+        addToNavbar(true,toggle, viewTitle);
     }
 
     private void addDrawerContent() {
@@ -65,6 +85,10 @@ public class MainLayout extends AppLayout {
         nav.addItem(new AppNavItem("Master-Detail", MasterDetailView.class, "la la-columns"));
         nav.addItem(new AppNavItem("Checkout Form", CheckoutFormView.class, "la la-credit-card"));
         nav.addItem(new AppNavItem("Empty", EmptyView.class, "la la-file"));
+        nav.addItem(new AppNavItem("Sign-up", SignUpView.class, "la la-file"));
+        nav.addItem(new AppNavItem("Items", ItemListView.class, "la la-globe"));
+        nav.addItem(new AppNavItem("Login", LoginView.class, "la la-globe"));
+
 
         return nav;
     }
@@ -84,5 +108,20 @@ public class MainLayout extends AppLayout {
     private String getCurrentPageTitle() {
         PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
         return title == null ? "" : title.value();
+    }
+
+    private Component[] createRoutes(){
+       var user =  VaadinSession.getCurrent().getAttribute(Users.class);
+        return authService.getAuthorizedRoutes(user.getRole())
+                .stream()
+                .map(r -> createTab(r.name(),r.view()))
+                .toArray(Component[] ::new);
+    }
+
+    private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
+        final Tab tab = new Tab();
+        tab.add(new RouterLink(text,navigationTarget));
+        ComponentUtil.setData(tab,Class.class,navigationTarget);
+        return tab;
     }
 }
