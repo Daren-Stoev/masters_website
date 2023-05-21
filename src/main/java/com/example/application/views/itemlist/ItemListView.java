@@ -1,8 +1,8 @@
 package com.example.application.views.itemlist;
 
-import com.example.application.data.entity.Item;
-import com.example.application.data.entity.Users;
-import com.example.application.data.service.ItemService;
+import com.example.application.data.entity.Customer;
+import com.example.application.data.entity.Product;
+import com.example.application.data.services.ProductService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasStyle;
@@ -35,7 +35,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility.TextColor;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import java.util.List;
-import java.util.Optional;
+
 @PageTitle("Item List")
 @Route(value = "item-list/:ItemID?/:action?(edit)", layout = MainLayout.class)
 @AnonymousAllowed
@@ -44,27 +44,28 @@ public class ItemListView extends Main implements HasComponents, HasStyle, Befor
     private final String ITEM_ID = "ItemID";
     private TextField searchBar;
     private Checkbox filter;
-    private final ItemService itemService;
+    private ProductService productService;
     private final Button createButton;
-    private List<Item> items;
-    private OrderedList itemContainer;
+    private List<Product> products;
+    private OrderedList productContainer;
 
-    public ItemListView(ItemService itemService) {
-        this.itemService = itemService;
+    public ItemListView(ProductService productService) {
+        this.productService = productService;
         constructUI();
-        items = itemService.findAllItems();
+        //items = itemService.findAllItems();
+        products = productService.getAllProducts();
         filter = new Checkbox("Show only your items");
         //filter.addClickListener(e -> {});
         searchBar = new TextField("Type here to search");
         searchBar.addValueChangeListener(e -> {
-            items = itemService.findByNameStartsWithIgnoreCase(searchBar.getValue());
-            itemContainer.removeAll();
-            for ( Item item : items) {
-                if(filter.getValue() && item.getUser() == VaadinSession.getCurrent().getAttribute(Users.class)){
-                    itemContainer.add(new ItemListViewCard(item));
+            products = productService.findByNameStartsWithIgnoreCase(searchBar.getValue());
+            productContainer.removeAll();
+            for ( Product product : products ) {
+                if(filter.getValue() && product.getOwner() == VaadinSession.getCurrent().getAttribute(Customer.class)){
+                   productContainer.add(new ItemListViewCard(product));
                 } else if (!filter.getValue())
                 {
-                    itemContainer.add(new ItemListViewCard(item));
+                    productContainer.add(new ItemListViewCard(product));
                 }
             }
         });
@@ -74,9 +75,9 @@ public class ItemListView extends Main implements HasComponents, HasStyle, Befor
             UI.getCurrent().navigate(ItemNewView.class);
         });
         add(searchBar,filter,createButton);
-        if (items != null){
-            for ( Item item : items) {
-                itemContainer.add(new ItemListViewCard(item));
+        if (products != null){
+            for ( Product product : products) {
+                productContainer.add(new ItemListViewCard(product));
             }}
     }
 
@@ -99,11 +100,11 @@ public class ItemListView extends Main implements HasComponents, HasStyle, Befor
         sortBy.setItems("Popularity", "Newest first", "Oldest first");
         sortBy.setValue("Popularity");
 
-        itemContainer = new OrderedList();
-        itemContainer.addClassNames(Gap.MEDIUM, Display.GRID, ListStyleType.NONE, Margin.NONE, Padding.NONE);
+        productContainer = new OrderedList();
+        productContainer.addClassNames(Gap.MEDIUM, Display.GRID, ListStyleType.NONE, Margin.NONE, Padding.NONE);
 
         container.add(headerContainer, sortBy);
-        add(container, itemContainer);
+        add(container, productContainer);
 
     }
     @Override

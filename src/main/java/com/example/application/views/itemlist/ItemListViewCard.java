@@ -1,6 +1,6 @@
 package com.example.application.views.itemlist;
 
-import com.example.application.data.entity.Item;
+import com.example.application.data.entity.Product;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.theme.lumo.LumoUtility.AlignItems;
@@ -19,10 +19,10 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Width;
 
 public class ItemListViewCard extends ListItem {
 
-    private Item item;
-    public ItemListViewCard(Item item) {
+    private Product product;
+    public ItemListViewCard(Product product) {
 
-        this.item = item;
+        this.product = product;
         addClassNames(Background.CONTRAST_5, Display.FLEX, FlexDirection.COLUMN, AlignItems.START, Padding.MEDIUM,
                 BorderRadius.LARGE);
 
@@ -33,19 +33,19 @@ public class ItemListViewCard extends ListItem {
 
         Image image = new Image();
         image.setWidth("100%");
-        image.setSrc(item.getImageUrl());
-        image.setAlt(item.getDescription());
+        image.setSrc(product.getImageUrl());
+        image.setAlt(product.getDescription());
 
         div.add(image);
 
         Span header = new Span();
         header.addClassNames(FontSize.XLARGE, FontWeight.SEMIBOLD);
-        header.setText(item.getName());
+        header.setText(product.getName());
 
-        Paragraph description = new Paragraph(item.getDescription());
+        Paragraph description = new Paragraph(product.getDescription());
         description.addClassName(Margin.Vertical.MEDIUM);
 
-        Paragraph price = new Paragraph("Price" + item.getPrice().toString());
+        Paragraph price = new Paragraph("Price" + product.getPrice());
         description.addClassName(Margin.Vertical.MEDIUM);
 
         Span badge = new Span();

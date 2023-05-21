@@ -1,0 +1,465 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7/"
+     xml:base="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:untitled-ontology-7="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasOrderCustomer -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasOrderCustomer">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Order"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasOrderProduct -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasOrderProduct">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Order"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasOrders -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasOrders">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Order"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasPerk -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasPerk">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Perk"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasProductOwner -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasProductOwner">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasProductPrice -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasProductPrice">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductPrice"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasSubscription -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasSubscription">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Subscription"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasSubscriptionType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasSubscriptionType">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Subscription"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#SubscriptionType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasTier -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasTier">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Subscription"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Email -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Email">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#FirstName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#FirstName">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#LastName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#LastName">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#OrderDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#OrderDate">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Order"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#OrderNumber -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#OrderNumber">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Order"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#long"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Password -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Password">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductDescription -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductDescription">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductDescription"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductImage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductImage">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductName">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductPrice -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductPrice">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#UserName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#UserName">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#BasicTier -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#BasicTier">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Cart -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Cart"/>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Order -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Order">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasOrderCustomer"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasOrderProduct"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Perk -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Perk">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Subscription"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#PremiumTier -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#PremiumTier">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Product">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasProductOwner"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductDescription"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductImage"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductName"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductPrice"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductCountPerk -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductCountPerk">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Perk"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ShowProductsMorePerk -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ShowProductsMorePerk">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Perk"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#StandartTier -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#StandartTier">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Subscription -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Subscription"/>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#SubscriptionType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#SubscriptionType"/>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Subscription"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#User">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#hasOrders"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Order"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#BasicTier -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#BasicTier">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#BasicTier"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier"/>
+        <untitled-ontology-7:hasPerk rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#BasicTier"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#PremiumTier -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#PremiumTier">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#PremiumTier"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier"/>
+        <untitled-ontology-7:hasPerk rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#PremiumTier"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductSpacePerk -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#ProductSpacePerk">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Perk"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#StandartTier -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#StandartTier">
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#StandartTier"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#Tier"/>
+        <untitled-ontology-7:hasPerk rdf:resource="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#StandartTier"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi -->
+

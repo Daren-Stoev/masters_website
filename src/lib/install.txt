@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=D:\Уни\Магистър\Ontology_test\src\lib\com.fasterxml.jackson.databind.jar -DgroupId=com.fasterxml.jackson.databind -DartifactId=com.fasterxml.jackson.databind -Dversion=1.0 -Dpackaging=Jar

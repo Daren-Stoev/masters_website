@@ -28,16 +28,17 @@ public class LoginView extends VerticalLayout {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
 
-        TextField username = new TextField("Username");
-        PasswordField password = new PasswordField("Password");
+        TextField emailField = new TextField("Email");
+        PasswordField passwordField = new PasswordField("Password");
         Button loginButton = new Button("Login");
         loginButton.addClickListener(e -> {
             try {
-                authService.authenticate(username.getValue(),password.getValue());
+                authService.authenticate(emailField.getValue(),passwordField.getValue());
                 Notification.show("Hello ");
                 UI.getCurrent().navigate(ItemListView.class);
             } catch (AuthService.AuthException ex) {
-                Notification.show(username.getValue() + " | " + password.getValue());
+                System.out.println(ex);
+                Notification.show(emailField.getValue() + " | " + passwordField.getValue());
             }
         });
 
@@ -46,6 +47,6 @@ public class LoginView extends VerticalLayout {
         signUpButton.addClickListener(e -> {
             UI.getCurrent().navigate(SignUpView.class);
         });
-        add(new H1("Login"),username,password,loginButton,signUpButton);
+        add(new H1("Login"),emailField,passwordField,loginButton,signUpButton);
     }
 }

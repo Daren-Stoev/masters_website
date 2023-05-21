@@ -1,0 +1,704 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7">
+    <Prefix name="" IRI="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="untitled-ontology-7" IRI="http://www.semanticweb.org/user/ontologies/2023/4/untitled-ontology-7#"/>
+    <Declaration>
+        <Class IRI="#BasicTier"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cart"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Order"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Perk"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PremiumTier"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Product"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ProductCountPerk"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ShowProductsMorePerk"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#StandartTier"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Subscription"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SubscriptionType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Tier"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#User"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasOrderCustomer"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasOrderProduct"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasOrders"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasPerk"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasProductOwner"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasProductPrice"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasSubscription"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasSubscriptionType"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasTier"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Email"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#FirstName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#LastName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#OrderDate"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#OrderNumber"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Password"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ProductDescription"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ProductId"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ProductImage"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ProductName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ProductPrice"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#SubscriptionType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#UserName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Username"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BasicTier"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#PremiumTier"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ProductSpacePerk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#StandartTier"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#test@e.com"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#test@1e.com"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#BasicTier"/>
+        <Class IRI="#Tier"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Order"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#hasOrderCustomer"/>
+            <Class IRI="#User"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Order"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#hasOrderProduct"/>
+            <Class IRI="#Product"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Perk"/>
+        <Class IRI="#Subscription"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PremiumTier"/>
+        <Class IRI="#Tier"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Product"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#hasProductOwner"/>
+            <Class IRI="#User"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Product"/>
+        <DataAllValuesFrom>
+            <DataProperty IRI="#ProductDescription"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Product"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#ProductImage"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Product"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#ProductName"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Product"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#ProductPrice"/>
+            <Datatype abbreviatedIRI="xsd:decimal"/>
+        </DataExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ProductCountPerk"/>
+        <Class IRI="#Perk"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ShowProductsMorePerk"/>
+        <Class IRI="#Perk"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#StandartTier"/>
+        <Class IRI="#Tier"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Tier"/>
+        <Class IRI="#Subscription"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#User"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasOrders"/>
+            <Class IRI="#Order"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#User"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasSubscription"/>
+            <Class IRI="#BasicTier"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#BasicTier"/>
+        <NamedIndividual IRI="#BasicTier"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Tier"/>
+        <NamedIndividual IRI="#BasicTier"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PremiumTier"/>
+        <NamedIndividual IRI="#PremiumTier"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Tier"/>
+        <NamedIndividual IRI="#PremiumTier"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Perk"/>
+        <NamedIndividual IRI="#ProductSpacePerk"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#StandartTier"/>
+        <NamedIndividual IRI="#StandartTier"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Tier"/>
+        <NamedIndividual IRI="#StandartTier"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#User"/>
+        <NamedIndividual IRI="#a@abv.bg"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#User"/>
+        <NamedIndividual IRI="#test@e.com"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#User"/>
+        <NamedIndividual IRI="#test@1e.com"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasPerk"/>
+        <NamedIndividual IRI="#BasicTier"/>
+        <NamedIndividual IRI="#BasicTier"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasPerk"/>
+        <NamedIndividual IRI="#PremiumTier"/>
+        <NamedIndividual IRI="#PremiumTier"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasPerk"/>
+        <NamedIndividual IRI="#StandartTier"/>
+        <NamedIndividual IRI="#StandartTier"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSubscription"/>
+        <NamedIndividual IRI="#a@abv.bg"/>
+        <NamedIndividual IRI="#BasicTier"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSubscription"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <NamedIndividual IRI="#BasicTier"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSubscription"/>
+        <NamedIndividual IRI="#test@1e.com"/>
+        <NamedIndividual IRI="#BasicTier"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Email"/>
+        <NamedIndividual IRI="#a@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">a@abv.bg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#FirstName"/>
+        <NamedIndividual IRI="#a@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Daren1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#LastName"/>
+        <NamedIndividual IRI="#a@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Stoev1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#a@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">e66717edcf8b898ad6b261141bd68edf311677cc75622f6f6d5a6db35e18646a</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#PasswordSalt"/>
+        <NamedIndividual IRI="#a@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">9f7f7de215d230f22b971992a6e9b2cc</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SubscriptionType"/>
+        <NamedIndividual IRI="#a@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BasicTier</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Username"/>
+        <NamedIndividual IRI="#a@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">daren</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Email"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">test@e.com</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#FirstName"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">John</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#LastName"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Smith</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">4273e793ea7ee4045743122b59e378097503145b9080bf81ebae0211d8de5408</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">98a52622dbb61ab87ad96041189fc2b239de5db3152ee47358a3d81f7d89e420</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">a01307aa7fbe38c54b3d8193cb6ae7418b4e05ff857e1fb95e9171c0fb5e20ec</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">5dfb0e8d2b4e6afb739e038648fbdf2152725769cac143e6918720a3eea90c29</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">7d95588592d6005240cab251e67dbfe37af718cc0a0170751b868e2fae0efe59</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">4769ee019f5af682a3bf461e722c53bdfaef7c35deabcd685ff514c7f2389301</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">a01aadec8c38d7d109d1c68c9c33b80d988f58d52f30f1439f4cedced1426a9a</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">84ef86715f3c0eefa71069750cf74393ddbec4517b2ba2afcbf3a8f793747d93</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">fd052d4a3fa0887707046f746777ad460358fae2af8990113a4a0902ad27c027</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SubscriptionType"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">BasicTier</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Username"/>
+        <NamedIndividual IRI="#test@e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Peter</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Email"/>
+        <NamedIndividual IRI="#test@1e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">test@1e.com</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#FirstName"/>
+        <NamedIndividual IRI="#test@1e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">John</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#LastName"/>
+        <NamedIndividual IRI="#test@1e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Smith</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#test@1e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">28f38204240abf242f4642b189942f54ad217d9faa34468f072dc1d3c188401b</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SubscriptionType"/>
+        <NamedIndividual IRI="#test@1e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">BasicTier</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Username"/>
+        <NamedIndividual IRI="#test@1e.com"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Peter</Literal>
+    </DataPropertyAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasOrderCustomer"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasOrderProduct"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasOrders"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasPerk"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasProductOwner"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasProductPrice"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasSubscription"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasSubscriptionType"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasTier"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasOrderCustomer"/>
+        <Class IRI="#Order"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasOrderProduct"/>
+        <Class IRI="#Order"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasOrders"/>
+        <Class IRI="#User"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasPerk"/>
+        <Class IRI="#Tier"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasProductPrice"/>
+        <Class IRI="#Product"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasSubscription"/>
+        <Class IRI="#User"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasSubscriptionType"/>
+        <Class IRI="#Subscription"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasTier"/>
+        <Class IRI="#Subscription"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+        <Class IRI="#Product"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasOrderCustomer"/>
+        <Class IRI="#User"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasOrderProduct"/>
+        <Class IRI="#Product"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasOrders"/>
+        <Class IRI="#Order"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasPerk"/>
+        <Class IRI="#Perk"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasProductPrice"/>
+        <DataAllValuesFrom>
+            <DataProperty IRI="#ProductPrice"/>
+            <Datatype abbreviatedIRI="xsd:decimal"/>
+        </DataAllValuesFrom>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSubscription"/>
+        <Class IRI="#BasicTier"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSubscription"/>
+        <Class IRI="#PremiumTier"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSubscription"/>
+        <Class IRI="#StandartTier"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSubscription"/>
+        <Class IRI="#Subscription"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSubscriptionType"/>
+        <Class IRI="#SubscriptionType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasTier"/>
+        <Class IRI="#Tier"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+        <Class IRI="#User"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Email"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#FirstName"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#LastName"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#OrderDate"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#OrderNumber"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Password"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ProductDescription"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ProductImage"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ProductName"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ProductPrice"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#UserName"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#ProductId"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Email"/>
+        <Class IRI="#User"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#FirstName"/>
+        <Class IRI="#User"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#LastName"/>
+        <Class IRI="#User"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#OrderDate"/>
+        <Class IRI="#Order"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#OrderNumber"/>
+        <Class IRI="#Order"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Password"/>
+        <Class IRI="#User"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ProductDescription"/>
+        <Class IRI="#Product"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ProductDescription"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#ProductDescription"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataExactCardinality>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ProductImage"/>
+        <Class IRI="#Product"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ProductName"/>
+        <Class IRI="#Product"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ProductPrice"/>
+        <Class IRI="#Product"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#UserName"/>
+        <Class IRI="#User"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#Email"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#FirstName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#LastName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#OrderDate"/>
+        <Datatype abbreviatedIRI="xsd:dateTimeStamp"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#OrderNumber"/>
+        <Datatype abbreviatedIRI="xsd:long"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Password"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ProductDescription"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ProductName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ProductPrice"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#UserName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+

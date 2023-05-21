@@ -1,7 +1,7 @@
 package com.example.application.security;
 
-import com.example.application.data.entity.Users;
-import com.example.application.data.service.UserService;
+import com.example.application.data.entity.Customer;
+import com.example.application.data.ontologies.CustomerOntology;
 import com.example.application.views.MainLayout;
 import com.example.application.views.about.AboutView;
 import com.example.application.views.checkoutform.CheckoutFormView;
@@ -9,9 +9,7 @@ import com.example.application.views.empty.EmptyView;
 import com.example.application.views.helloworld.HelloWorldView;
 import com.example.application.views.imagelist.ImageListView;
 import com.example.application.views.itemlist.ItemListView;
-import com.example.application.views.login.LoginView;
 import com.example.application.views.logout.LogoutView;
-import com.example.application.views.masterdetail.MasterDetailView;
 import com.example.application.views.signup.SignUpView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.router.RouteConfiguration;
@@ -23,6 +21,7 @@ import java.util.List;
 @Service
 public class AuthService {
 
+
     public record AuthorizedRoute(String route, String name, Class<? extends Component> view)
     {
 
@@ -31,34 +30,26 @@ public class AuthService {
     public class AuthException extends Exception {
     }
 
-    private final UserService userService;
+    private final CustomerOntology customerOntology;
 
-    public AuthService(UserService userService)
-    {
-        this.userService = userService;
+    public AuthService(CustomerOntology customerOntology) {
+        this.customerOntology = customerOntology;
     }
-    public void authenticate(String username, String password) throws AuthException{
+    public void authenticate(String email, String password) throws AuthException{
        // Users user = userService.findByUsername(username);
-        Users user = userService.findByCredentials(username,password);
-        Users dummy = new Users();
-        dummy.setUsername("dummy");
-        dummy.setPassword("dummy pass");
-        dummy.setEmail("dummy@test");
-        dummy.setFirstName("FirstDummy");
-        dummy.setLastName("LastDummy");
-        dummy.setRole(1);
-        Long id = Long.parseLong("1254");
-        dummy.setId(id);
-        if(user != null /*&& user.getPassword() == password*/)
+        Customer customer = customerOntology.getCustomer(email);
+
+        if(customer != null && customer.verifyPassword(password))
         {
-            VaadinSession.getCurrent().setAttribute(Users.class,user);
-            createRoutes(user.getRole());
+            VaadinSession.getCurrent().setAttribute(Customer.class, customer);
+            // Some service for admins i guess? I don't remember.'
+            createRoutes(1);
         }
         else {
             throw new AuthException();
             //createRoutes(user.getRole());
         }
-        //VaadinSession.getCurrent().setAttribute(Users.class,user);
+        //VaadinSession.getCurrent().setAttribute(Customer.class, customer);
         //createRoutes(dummy.getRole());
 
     }
@@ -96,7 +87,6 @@ public class AuthService {
         routes.add(new AuthorizedRoute("signup","Signup", SignUpView.class));
         routes.add(new AuthorizedRoute("about","About", AboutView.class));
         routes.add(new AuthorizedRoute("hello-world","Hello-World", HelloWorldView.class));
-        routes.add(new AuthorizedRoute("master-detail/:samplePersonID?/:action?(edit)","Master", MasterDetailView.class));
         routes.add(new AuthorizedRoute("empty","Empty", EmptyView.class));
         routes.add(new AuthorizedRoute("checkout-form","Checkout Form", CheckoutFormView.class));
         routes.add(new AuthorizedRoute("image-list","Image-List", ImageListView.class));
