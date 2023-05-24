@@ -28,12 +28,20 @@ public class ProductService {
 
         return filteredProducts;
     }
-
+    public Product getProductById(String id) {
+        return productOntology.getProductById(id);
+    }
     public List<Product> getAllProducts() {
         return productOntology.getAllProducts();
     }
 
     public void addProductToOntology(Product product) {
-        productOntology.addProduct(product);
+        product.printValues();
+        System.out.println(productOntology);
+        try {
+            productOntology.addProduct(product);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

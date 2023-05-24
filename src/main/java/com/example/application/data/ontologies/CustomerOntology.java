@@ -286,6 +286,28 @@ public class CustomerOntology {
         return customers;
     }
 
+    public Customer getCustomerFromIndividual(OWLNamedIndividual customerIndividual)
+    {
+        OWLDataProperty emailProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Email"));
+        OWLDataProperty usernameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "UserName"));
+        OWLDataProperty passwordProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Password"));
+        OWLDataProperty passwordSaltProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "PasswordSalt"));
+        OWLDataProperty firstNameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "FirstName"));
+        OWLDataProperty lastNameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "LastName"));
+        OWLObjectProperty subscriptionTypeProperty = dataFactory.getOWLObjectProperty(IRI.create(ontologyIRIStr + "hasSubscription"));
+
+        String email = retrieveDataPropertyValue(customerIndividual, emailProperty);
+        String username = retrieveDataPropertyValue(customerIndividual, usernameProperty);
+        String password = retrieveDataPropertyValue(customerIndividual, passwordProperty);
+        String firstName = retrieveDataPropertyValue(customerIndividual, firstNameProperty);
+        String lastName = retrieveDataPropertyValue(customerIndividual, lastNameProperty);
+        String passwordSalt = retrieveDataPropertyValue(customerIndividual,passwordSaltProperty);
+        OWLNamedIndividual subscriptionType = (OWLNamedIndividual) retrieveObjectPropertyValue(customerIndividual, subscriptionTypeProperty);
+        String subscriptionTypeString = subscriptionType.getIRI().getFragment();
+        return new Customer(username, password,passwordSalt, email, subscriptionTypeString, firstName, lastName);
+
+    }
+
     private String retrieveDataPropertyValue(OWLNamedIndividual individual, OWLDataProperty property) {
         Set<OWLLiteral> literals = reasoner.getDataPropertyValues(individual, property);
         if (!literals.isEmpty()) {

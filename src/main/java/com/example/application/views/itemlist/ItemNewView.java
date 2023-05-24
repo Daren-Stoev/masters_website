@@ -23,12 +23,15 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.converter.StringToDoubleConverter;
+import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.data.validator.*;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.data.provider.ListDataProvider;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
 import java.io.File;
@@ -36,6 +39,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+
+import static com.helger.commons.mock.CommonsAssert.assertEquals;
 
 @PageTitle("Item-new")
 @Route(value = "item-new", layout = MainLayout.class)
@@ -50,6 +55,8 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
     private TextArea description;
     private TextField price;
     private Upload imageUpload;
+    private ComboBox<String> category;
+    private TextField quantity;
     private MemoryBuffer imageBuffer;
 
     private String imageUrl;
@@ -114,6 +121,21 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
                 .withValidator(new StringLengthValidator("Description must be between 3 and 1000 characters", 3, 1000))
                 .bind(Product::getDescription, Product::setDescription);
 
+        category = new ComboBox<>("Category");
+        category.setItems("Clothing","Apparel","Shoes","Computers","Kitchen","Music","Movies","Hobbies","Pets");
+        category.setRequired(true);
+        category.setRequiredIndicatorVisible(true);
+        binder.forField(category).bind(Product::getCategory, Product::setCategory);
+
+        quantity = new TextField("Stock quantity");
+        quantity.setRequired(true);
+        quantity.setRequiredIndicatorVisible(true);
+        binder.forField(quantity).withConverter(new StringToIntegerConverter("Please enter a valid number"))
+                .withValidator(new IntegerRangeValidator("Quantity must be between 0 and 100", 0, 100))
+                .bind(Product::getQuantity, Product::setQuantity);
+
+
+
         imageBuffer = new MemoryBuffer();
         imageUpload = new Upload(imageBuffer);
         imageUpload.setMaxFiles(1);
@@ -135,7 +157,7 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
                 e.printStackTrace();
             }
         });
-        formLayout.add(name,price,description,imageUpload);
+        formLayout.add(name,price,description,category,imageUpload,quantity);
 
         cancelButton.addClickListener(e -> {
             UI.getCurrent().navigate(ItemListView.class);
@@ -149,13 +171,17 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
                 if (this.product == null) {
                     this.product = new Product();}
                 // Checks if the email is already in use
+                System.out.println("Setting owner");
                 product.setOwner(VaadinSession.getCurrent().getAttribute(Customer.class));
 
                 if(product.getImageUrl() == null)
                 {
-                    product.setImageUrl("https://ichef.bbci.co.uk/news/976/cpsprodpb/A716/production/_95147724_kneeache.jpg");
+                    product.setImageUrl(this.imageUrl);
                 }
+                System.out.println("Writing bean");
+                //product.printValues();
                 binder.writeBean(this.product);
+                System.out.println("Saving product to ontology");
                 productService.addProductToOntology(this.product);
                 UI.getCurrent().navigate(ItemListView.class);
                 Notification.show("Data updated");
