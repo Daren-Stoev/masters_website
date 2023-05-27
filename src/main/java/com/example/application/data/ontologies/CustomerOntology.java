@@ -90,6 +90,7 @@ public class CustomerOntology {
 
         // Save the ontology
         saveOntology();
+        reasoner.flush();
     }
 
     public boolean isCustomerEmailExists(String email) {
@@ -169,17 +170,20 @@ public class CustomerOntology {
     }
 
     public Customer getCustomer(String email) {
+        reasoner.flush();
         OWLClass customerClass = dataFactory.getOWLClass(IRI.create(ontologyIRIStr + "User"));
         OWLDataProperty emailProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Email"));
-        OWLDataProperty usernameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "UserName"));
+        OWLDataProperty usernameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Username"));
         OWLDataProperty passwordProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Password"));
         OWLDataProperty passwordSaltProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "PasswordSalt"));
         OWLDataProperty firstNameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "FirstName"));
         OWLDataProperty lastNameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "LastName"));
         OWLObjectProperty subscriptionTypeProperty = dataFactory.getOWLObjectProperty(IRI.create(ontologyIRIStr + "hasSubscription"));
 
-        OWLIndividual individualEmail = dataFactory.getOWLNamedIndividual(IRI.create(ontologyIRIStr + email));
+        //System.out.println("Email: " + email);
+        //System.out.println("Email Property: " + emailProperty);
 
+        OWLIndividual individualEmail = dataFactory.getOWLNamedIndividual(IRI.create(ontologyIRIStr + email));
 
         OWLDataPropertyAssertionAxiom emailAxiom = dataFactory.getOWLDataPropertyAssertionAxiom(emailProperty, individualEmail, dataFactory.getOWLLiteral(email));
 
@@ -190,28 +194,12 @@ public class CustomerOntology {
         for (OWLNamedIndividual individual : individuals) {
             Set<OWLIndividualAxiom> axioms = ontology.getAxioms(individual);
             if (axioms.contains(emailAxiom)) {
+                //System.out.println("Found email axiom");
+                customerIndividual = individual;
                 Set<OWLClassExpression> types = individual.getTypes(ontology);
+                //System.out.println("Types" + types);
                 if (types.contains(customerClass)) {
-                  /*
-                    customerIndividual = individual;
-                    Set<OWLDataPropertyAssertionAxiom> customerDataPropertyAxioms = ontology.getDataPropertyAssertionAxioms(customerIndividual);
-                    Set<OWLObjectPropertyAssertionAxiom> customerObjectPropertyAxioms = ontology.getObjectPropertyAssertionAxioms(customerIndividual);
 
-                    Map<OWLDataProperty, OWLLiteral> customerDataPropertyValues = new HashMap<>();
-                    for (OWLDataPropertyAssertionAxiom axiom : customerDataPropertyAxioms) {
-                        OWLDataProperty property = axiom.getProperty().asOWLDataProperty();
-                        OWLLiteral value = axiom.getObject();
-
-                        customerDataPropertyValues.put(property, value);
-                    }
-
-                    Map<OWLObjectProperty, OWLIndividual> customerObjectPropertyValues = new HashMap<>();
-                    for (OWLObjectPropertyAssertionAxiom axiom : customerObjectPropertyAxioms) {
-                        OWLObjectProperty property = axiom.getProperty().asOWLObjectProperty();
-                        OWLIndividual value = axiom.getObject();
-
-                        customerObjectPropertyValues.put(property, value);
-                   */
                     String username = retrieveDataPropertyValue(individual, usernameProperty);
                     String password = retrieveDataPropertyValue(individual, passwordProperty);
                     String firstName = retrieveDataPropertyValue(individual, firstNameProperty);
@@ -221,7 +209,6 @@ public class CustomerOntology {
                     // Retrieve customer object property values
                     OWLNamedIndividual subscriptionTypeIndividual = (OWLNamedIndividual) retrieveObjectPropertyValue(individual, subscriptionTypeProperty);
                     String subscriptionType = subscriptionTypeIndividual != null ? subscriptionTypeIndividual.getIRI().getFragment() : "";
-
                     // Create Customer object and add it to the list
                     Customer customer = new Customer(username, password,passwordSalt, email, subscriptionType, firstName, lastName);
 
@@ -289,7 +276,7 @@ public class CustomerOntology {
     public Customer getCustomerFromIndividual(OWLNamedIndividual customerIndividual)
     {
         OWLDataProperty emailProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Email"));
-        OWLDataProperty usernameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "UserName"));
+        OWLDataProperty usernameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Username"));
         OWLDataProperty passwordProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Password"));
         OWLDataProperty passwordSaltProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "PasswordSalt"));
         OWLDataProperty firstNameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "FirstName"));

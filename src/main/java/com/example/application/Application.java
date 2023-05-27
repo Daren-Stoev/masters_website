@@ -3,6 +3,7 @@ package com.example.application;
 import com.example.application.data.ontologies.CustomerOntology;
 import com.example.application.data.ontologies.ProductOntology;
 import com.example.application.data.services.CustomerService;
+import com.example.application.data.services.OrderService;
 import com.example.application.data.services.ProductService;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
@@ -29,7 +30,7 @@ import org.springframework.context.annotation.Bean;
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+            SpringApplication.run(Application.class, args);
     }
     @Bean
     public CustomerOntology customerOntology() {
@@ -46,7 +47,11 @@ public class Application implements AppShellConfigurator {
     public ProductService productService() {
         return new ProductService();
     }
-
+    @Bean
+    public OrderService orderService() {
+        // Create and configure your CustomerService instance here
+        return new OrderService();
+    }
 
     @Bean
     public CustomerService customerService() {

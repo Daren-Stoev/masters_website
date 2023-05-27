@@ -1,5 +1,6 @@
 package com.example.application.data.services;
 
+import com.example.application.data.entity.Customer;
 import com.example.application.data.entity.Product;
 
 import java.util.ArrayList;
@@ -16,6 +17,14 @@ public class ProductService {
     public List<Product> findByNameStartsWithIgnoreCase(String value) {
 
         products = productOntology.getAllProducts();
+
+        //filter by name
+        List<Product> filteredProducts = filterByNameContainsIgnoreCase(products, value);
+
+        return filteredProducts;
+    }
+
+    public List<Product> filterByNameContainsIgnoreCase(List<Product> products,String value) {
 
         //filter by name
         List<Product> filteredProducts = new ArrayList<Product>();
@@ -43,5 +52,19 @@ public class ProductService {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    //Not optimized at all but it works,maybe
+    public List<Product> getProductsByCustomer(Customer customer) {
+        List<Product> allProducts = productOntology.getAllProducts();
+        List<Product> result = new ArrayList<>();
+
+        for (Product product : allProducts) {
+            if (product.getOwner().getEmail().equals(customer.getEmail())) {
+                result.add(product);
+            }
+        }
+    return result;
+
     }
 }

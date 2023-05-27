@@ -136,8 +136,10 @@ public class Customer {
     }
 
     public boolean verifyPassword(String passwordToCheck) {
+
         byte[] hashedPasswordToCheck = hashPassword(passwordToCheck, this.password_salt);
         byte[] storedPasswordBytes = hexToBytes(this.password);
+
         return constantTimeComparison(hashedPasswordToCheck, storedPasswordBytes);
     }
 

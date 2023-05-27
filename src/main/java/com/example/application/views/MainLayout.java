@@ -13,6 +13,8 @@ import com.example.application.views.helloworld.HelloWorldView;
 import com.example.application.views.imagelist.ImageListView;
 import com.example.application.views.itemlist.ItemListView;
 import com.example.application.views.login.LoginView;
+import com.example.application.views.logout.LogoutView;
+import com.example.application.views.orders.OrderView;
 import com.example.application.views.signup.SignUpView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -86,6 +88,8 @@ public class MainLayout extends AppLayout {
         nav.addItem(new AppNavItem("Sign-up", SignUpView.class, "la la-file"));
         nav.addItem(new AppNavItem("Items", ItemListView.class, "la la-globe"));
         nav.addItem(new AppNavItem("Login", LoginView.class, "la la-globe"));
+        nav.addItem(new AppNavItem("Orders", OrderView.class, "la la-globe"));
+        nav.addItem(new AppNavItem("Logout", LogoutView.class, "la la-globe"));
 
 
         return nav;

@@ -70,5 +70,11 @@ public class Order {
         return IRI.create(OntologyIRIString+"Order_Number_"+ orderNumber.toString());
     }
 
+    public void printInfo() {
+        System.out.println("Product: " + product.getName());
+        System.out.println("Customer: " + customer.getUsername());
+        System.out.println("Datetime: " + datetime);
+        System.out.println("Order Number: " + orderNumber);
+    }
 }
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Base64;
 
 public class ImageUtils {
 
@@ -42,5 +43,15 @@ public class ImageUtils {
         return uniqueFileName;
     }
 
+    public String getFileDataUrl(String filePath) {
+        try {
+            File file = new File("src/files/images/products/" + filePath);
+            byte[] fileContent = Files.readAllBytes(file.toPath());
+            return Base64.getEncoder().encodeToString(fileContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }
 

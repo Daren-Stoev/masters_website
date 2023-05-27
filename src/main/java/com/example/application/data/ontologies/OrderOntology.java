@@ -9,9 +9,11 @@ import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
+import org.semanticweb.owlapi.util.OWLEntityRemover;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
 
@@ -142,6 +144,7 @@ public class OrderOntology {
     }
 
     public ArrayList<Order> getAllOrders() {
+        reasoner.flush();
         OWLClass orderClass = dataFactory.getOWLClass(IRI.create(ontologyIRIStr + "Order"));
         OWLDataProperty idProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "OrderNumber"));
         OWLDataProperty timestampProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "OrderDate"));
@@ -176,6 +179,7 @@ public class OrderOntology {
 
     private Product retrieveOrderProduct(OWLNamedIndividual orderIndividual) {
         OWLObjectProperty hasOrderProduct = dataFactory.getOWLObjectProperty(IRI.create(ontologyIRIStr + "hasOrderProduct"));
+        //Try with only ProductId and not productIndividual
         Set<OWLNamedIndividual> productIndividuals = reasoner.getObjectPropertyValues(orderIndividual, hasOrderProduct).getFlattened();
         if (!productIndividuals.isEmpty()) {
             OWLNamedIndividual productIndividual = (OWLNamedIndividual) productIndividuals.iterator().next();
@@ -189,5 +193,18 @@ public class OrderOntology {
             return literals.iterator().next().getLiteral();
         }
         return "";
+    }
+
+    public void removeOrder(Order order) {
+        OWLClass orderToRemove = dataFactory.getOWLClass(order.getIndividualIRI(ontologyIRIStr));
+        System.out.println("orderToRemove" + orderToRemove);
+        OWLEntityRemover remover = new OWLEntityRemover(ontologyManager, Collections.singleton(ontology));
+
+        orderToRemove.accept(remover);
+
+        ontologyManager.applyChanges(remover.getChanges());
+
+        saveOntology();
+        reasoner.flush();
     }
 }
