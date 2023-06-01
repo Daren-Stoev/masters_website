@@ -46,6 +46,10 @@
             String id = generateString();
             this.id = id;
         }
+        public Product(String id)
+        {
+            this.id = id;
+        }
         public String getId() {
             return id;
         }

@@ -80,6 +80,7 @@ public class OrderOntology {
         OWLAxiom idUniqueness = dataFactory.getOWLFunctionalDataPropertyAxiom(idProperty);
         ontologyManager.addAxiom(ontology, idUniqueness);
         saveOntology();
+        reasoner.flush();
 
     }
     public void addCustomer(OWLIndividual orderIndividual, String orderCustomer) {
@@ -179,7 +180,6 @@ public class OrderOntology {
 
     private Product retrieveOrderProduct(OWLNamedIndividual orderIndividual) {
         OWLObjectProperty hasOrderProduct = dataFactory.getOWLObjectProperty(IRI.create(ontologyIRIStr + "hasOrderProduct"));
-        //Try with only ProductId and not productIndividual
         Set<OWLNamedIndividual> productIndividuals = reasoner.getObjectPropertyValues(orderIndividual, hasOrderProduct).getFlattened();
         if (!productIndividuals.isEmpty()) {
             OWLNamedIndividual productIndividual = (OWLNamedIndividual) productIndividuals.iterator().next();
@@ -195,11 +195,12 @@ public class OrderOntology {
         return "";
     }
 
+
     public void removeOrder(Order order) {
-        OWLClass orderToRemove = dataFactory.getOWLClass(order.getIndividualIRI(ontologyIRIStr));
-        System.out.println("orderToRemove" + orderToRemove);
+        OWLNamedIndividual orderToRemove = dataFactory.getOWLNamedIndividual(order.getIndividualIRI(ontologyIRIStr));
         OWLEntityRemover remover = new OWLEntityRemover(ontologyManager, Collections.singleton(ontology));
 
+        // Visit the OWLIndividual representing the Order
         orderToRemove.accept(remover);
 
         ontologyManager.applyChanges(remover.getChanges());

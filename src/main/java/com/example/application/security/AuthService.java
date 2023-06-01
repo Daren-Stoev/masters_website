@@ -5,6 +5,8 @@ import com.example.application.data.ontologies.CustomerOntology;
 import com.example.application.views.MainLayout;
 import com.example.application.views.about.AboutView;
 import com.example.application.views.checkoutform.CheckoutFormView;
+import com.example.application.views.customers.CustomerInfoView;
+import com.example.application.views.customers.CustomerInfoViewRedirect;
 import com.example.application.views.empty.EmptyView;
 import com.example.application.views.helloworld.HelloWorldView;
 import com.example.application.views.imagelist.ImageListView;
@@ -92,6 +94,7 @@ public class AuthService {
         routes.add(new AuthorizedRoute("image-list","Image-List", ImageListView.class));
         routes.add(new AuthorizedRoute("card-list","Card List", ImageListView.class));
         routes.add(new AuthorizedRoute("logout","Logout", LogoutView.class));
+        routes.add(new AuthorizedRoute("customer-info-redirect","Profile Info Redirect", CustomerInfoViewRedirect.class));
 
 
 

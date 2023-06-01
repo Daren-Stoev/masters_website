@@ -1,5 +1,10 @@
 package com.example.application.data.entity;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.server.StreamResource;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -8,7 +13,7 @@ import java.util.Base64;
 
 public class ImageUtils {
 
-    public static String saveImageToFile(File imageFile) {
+    public String saveImageToFile(File imageFile) {
         // Define the target directory to save the image
         String targetDirectory = "src/files/images/products/";
 
@@ -43,15 +48,19 @@ public class ImageUtils {
         return uniqueFileName;
     }
 
-    public String getFileDataUrl(String filePath) {
+    public Image renderImage(String Url)
+    { String resourcePath = "src/files/images/products/" + Url;
         try {
-            File file = new File("src/files/images/products/" + filePath);
-            byte[] fileContent = Files.readAllBytes(file.toPath());
-            return Base64.getEncoder().encodeToString(fileContent);
-        } catch (IOException e) {
+            File imageFile = new File(resourcePath);
+            FileInputStream fileInputStream = new FileInputStream(imageFile);
+            StreamResource resource = new StreamResource(Url, () -> fileInputStream);
+            Image image = new Image(resource, "Alt Text");
+            image.setWidth("20%");
+            return image;
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return "";
         }
-    }
+        return new Image();}
+
 }
 

@@ -8,6 +8,8 @@ import com.example.application.security.AuthService;
 import com.example.application.views.about.AboutView;
 import com.example.application.views.cardlist.CardListView;
 import com.example.application.views.checkoutform.CheckoutFormView;
+import com.example.application.views.customers.CustomerInfoView;
+import com.example.application.views.customers.CustomerInfoViewRedirect;
 import com.example.application.views.empty.EmptyView;
 import com.example.application.views.helloworld.HelloWorldView;
 import com.example.application.views.imagelist.ImageListView;
@@ -87,10 +89,9 @@ public class MainLayout extends AppLayout {
         nav.addItem(new AppNavItem("Empty", EmptyView.class, "la la-file"));
         nav.addItem(new AppNavItem("Sign-up", SignUpView.class, "la la-file"));
         nav.addItem(new AppNavItem("Items", ItemListView.class, "la la-globe"));
-        nav.addItem(new AppNavItem("Login", LoginView.class, "la la-globe"));
         nav.addItem(new AppNavItem("Orders", OrderView.class, "la la-globe"));
         nav.addItem(new AppNavItem("Logout", LogoutView.class, "la la-globe"));
-
+        nav.addItem(new AppNavItem("Profile Info",CustomerInfoView.class, "la la-globe"));
 
         return nav;
     }

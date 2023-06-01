@@ -16,6 +16,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.NavigationEvent;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.VaadinSession;
@@ -44,7 +45,9 @@ public class ProductInfoView extends Main implements HasComponents,HasUrlParamet
         Button buyButton = new Button("Buy");
         Button editButton = new Button("Edit");
         Button reportButton = new Button("Report");
+        Button deleteButton = new Button("Delete");
         Button backButton = new Button("Back");
+
 
         // Add click listeners to the buttons
         buyButton.addClickListener(e -> {
@@ -56,7 +59,7 @@ public class ProductInfoView extends Main implements HasComponents,HasUrlParamet
         });
 
         editButton.addClickListener(e -> {
-            // Handle edit button click
+            UI.getCurrent().navigate(ProductEdit.class, product.getId());
         });
 
         reportButton.addClickListener(e -> {
@@ -66,17 +69,23 @@ public class ProductInfoView extends Main implements HasComponents,HasUrlParamet
         backButton.addClickListener(e -> {
             UI.getCurrent().navigate(ItemListView.class);
         });
+        deleteButton.addClickListener(e -> {
+            productService.deleteProduct(product);
+            Notification.show("Product Deleted");
+            UI.getCurrent().navigate(ItemListView.class);
+        });
 
-        // Add components to the layout
-        if(product.getOwner() == VaadinSession.getCurrent().getAttribute(Customer.class))
-        {
-            editButton.setVisible(false);
-            reportButton.setVisible(false);
+        if(product.getOwner().getEmail().
+                equals(
+                        (VaadinSession.getCurrent().getAttribute(Customer.class)).getEmail())) {
+            add(editButton, deleteButton, backButton);
         }
-        add( buyButton, editButton, reportButton, backButton);
+        else {
+            add(buyButton, reportButton, backButton);
+        }
     }
 
-    public void constructUI() {
+    private void constructUI() {
         // Create layout components
         VerticalLayout mainLayout = new VerticalLayout();
         mainLayout.setSpacing(true);
@@ -91,7 +100,7 @@ public class ProductInfoView extends Main implements HasComponents,HasUrlParamet
         // Description section
         Div descriptionDiv = new Div();
         Paragraph description = new Paragraph(product.getDescription());
-        descriptionDiv.add("Description : " + description);
+        descriptionDiv.add("Description : " + description.getText());
         mainLayout.add(descriptionDiv);
 
         // Image section
@@ -103,7 +112,7 @@ public class ProductInfoView extends Main implements HasComponents,HasUrlParamet
             FileInputStream fileInputStream = new FileInputStream(imageFile);
             StreamResource resource = new StreamResource(product.getImageUrl(), () -> fileInputStream);
             Image image = new Image(resource, "Alt Text");
-            image.setWidth("100%");
+            image.setWidth("25%");
             imageDiv.add(image);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

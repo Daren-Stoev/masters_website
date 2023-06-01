@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CustomerOntology {
     private OWLOntology ontology;
@@ -155,17 +156,62 @@ public class CustomerOntology {
         return null;  // Subscription type not found
     }
 
+    public void updateCustomer(Customer customer) {
+        IRI customerIRI = customer.getIndividualIRI(ontologyIRIStr);
+        OWLIndividual customerIndividual = dataFactory.getOWLNamedIndividual(customerIRI);
+
+        // Get the properties of the product
+        OWLDataProperty username = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Username"));
+        OWLDataProperty email = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Email"));
+        OWLDataProperty password = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "Password"));
+        OWLDataProperty firstName = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "FirstName"));
+        OWLDataProperty lastName = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "LastName"));
+        OWLDataProperty subscriptionType = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "SubscriptionType"));
+
+        OWLAxiom customerUsername = dataFactory.getOWLDataPropertyAssertionAxiom(username,customerIndividual,dataFactory.getOWLLiteral(customer.getUsername()));
+        OWLAxiom customerEmail = dataFactory.getOWLDataPropertyAssertionAxiom(email,customerIndividual,dataFactory.getOWLLiteral(customer.getEmail()));
+        OWLAxiom customerPassword = dataFactory.getOWLDataPropertyAssertionAxiom(password,customerIndividual,dataFactory.getOWLLiteral(customer.getPassword()));
+        OWLAxiom customerFirstName = dataFactory.getOWLDataPropertyAssertionAxiom(firstName,customerIndividual,dataFactory.getOWLLiteral(customer.getFirstName()));
+        OWLAxiom customerLastName = dataFactory.getOWLDataPropertyAssertionAxiom(lastName,customerIndividual,dataFactory.getOWLLiteral(customer.getLastName()));
+        OWLAxiom customerSubscriptionType = dataFactory.getOWLDataPropertyAssertionAxiom(subscriptionType,customerIndividual,dataFactory.getOWLLiteral(customer.getSubscriptionType()));
+
+        Set<OWLAxiom> filteredAxioms = ontology.getDataPropertyAssertionAxioms(customerIndividual).stream()
+                .filter(axiom -> axiom.getProperty().equals(username)
+                        || axiom.getProperty().equals(password)
+                        || axiom.getProperty().equals(email)
+                        || axiom.getProperty().equals(firstName)
+                        || axiom.getProperty().equals(lastName)
+                        || axiom.getProperty().equals(subscriptionType))
+                .collect(Collectors.toSet());
+
+        ontologyManager.removeAxioms(ontology, filteredAxioms);
+
+        ontologyManager.addAxiom(ontology, customerUsername);
+        ontologyManager.addAxiom(ontology, customerEmail);
+        ontologyManager.addAxiom(ontology, customerPassword);
+        ontologyManager.addAxiom(ontology, customerFirstName);
+        ontologyManager.addAxiom(ontology, customerLastName);
+        ontologyManager.addAxiom(ontology, customerSubscriptionType);
+
+        // Save the ontology
+        saveOntology();
+        reasoner.flush();
+
+
+    }
+
     // Function to remove a customer from the ontology
     public void removeCustomer(Customer customer) {
-        OWLClass customerToRemove = dataFactory.getOWLClass(customer.getIndividualIRI(ontologyIRIStr));
-
+        OWLNamedIndividual customerToRemove = dataFactory.getOWLNamedIndividual(customer.getIndividualIRI(ontologyIRIStr));
         OWLEntityRemover remover = new OWLEntityRemover(ontologyManager, Collections.singleton(ontology));
 
+        // Visit the OWLIndividual representing the Order
         customerToRemove.accept(remover);
 
         ontologyManager.applyChanges(remover.getChanges());
 
         saveOntology();
+        reasoner.flush();
 
     }
 
@@ -183,21 +229,17 @@ public class CustomerOntology {
         //System.out.println("Email: " + email);
         //System.out.println("Email Property: " + emailProperty);
 
-        OWLIndividual individualEmail = dataFactory.getOWLNamedIndividual(IRI.create(ontologyIRIStr + email));
-
-        OWLDataPropertyAssertionAxiom emailAxiom = dataFactory.getOWLDataPropertyAssertionAxiom(emailProperty, individualEmail, dataFactory.getOWLLiteral(email));
-
         Set<OWLNamedIndividual> individuals = ontology.getIndividualsInSignature();
         OWLNamedIndividual customerIndividual = null;
-
-
         for (OWLNamedIndividual individual : individuals) {
             Set<OWLIndividualAxiom> axioms = ontology.getAxioms(individual);
-            if (axioms.contains(emailAxiom)) {
-                //System.out.println("Found email axiom");
+            String individualEmail = retrieveDataPropertyValue(individual, emailProperty);
+
+            // Check if the email property value matches the given email
+            if (email.equals(individualEmail))  {
+
                 customerIndividual = individual;
                 Set<OWLClassExpression> types = individual.getTypes(ontology);
-                //System.out.println("Types" + types);
                 if (types.contains(customerClass)) {
 
                     String username = retrieveDataPropertyValue(individual, usernameProperty);
@@ -320,6 +362,8 @@ public class CustomerOntology {
             e.printStackTrace();
         }
     }
+
+
 
     // Other functions for retrieving and updating customer information from the ontology can be added here
 }

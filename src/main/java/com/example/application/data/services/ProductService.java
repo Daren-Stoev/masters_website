@@ -1,16 +1,25 @@
 package com.example.application.data.services;
 
 import com.example.application.data.entity.Customer;
+import com.example.application.data.entity.Order;
 import com.example.application.data.entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.application.data.ontologies.OrderOntology;
 import com.example.application.data.ontologies.ProductOntology;
 
 public class ProductService {
 
-    private ProductOntology productOntology = new ProductOntology();
+    private ProductOntology productOntology;
+
+    private OrderService orderService;
+
+    public ProductService(){
+        productOntology = new ProductOntology();
+        orderService = new OrderService();
+    }
 
     private List<Product> products = new ArrayList<Product>();
 
@@ -66,5 +75,21 @@ public class ProductService {
         }
     return result;
 
+    }
+
+    public void deleteProduct(Product product) {
+        orderService.deleteOrderByProduct(product);
+        productOntology.removeProduct(product);
+    }
+
+    public void updateProduct(Product product) {
+        productOntology.updateProduct(product);
+    }
+
+    public void deleteCustomerByCustomer(Customer customer) {
+        List<Product> products = getProductsByCustomer(customer);
+        for (Product product : products) {
+            deleteProduct(product);
+        }
     }
 }

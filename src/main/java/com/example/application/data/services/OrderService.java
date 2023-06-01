@@ -32,12 +32,7 @@ public class OrderService {
         ArrayList<Order> filteredOrders = new ArrayList<>();
 
         for (Order order : orders) {
-            System.out.println("customer Order");
-            order.printInfo();
-            System.out.println(order.getCustomer().getEmail());
-            System.out.println(customer.getEmail());
             if (order.getCustomer().getEmail().equals(customer.getEmail())) {
-                System.out.println("Added to list");
                 filteredOrders.add(order);
             }
         }
@@ -91,5 +86,12 @@ public class OrderService {
     }
     public void removeOrder(Order order){
         orderOntology.removeOrder(order);
+    }
+
+    public void deleteOrderByProduct(Product product) {
+        List<Order> orders =  getOrdersByProduct(product);
+        for (Order order : orders) {
+            orderOntology.removeOrder(order);
+        }
     }
 }

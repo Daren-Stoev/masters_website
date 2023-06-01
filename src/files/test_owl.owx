@@ -98,6 +98,12 @@
         <DataProperty IRI="#Password"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#PasswordSalt"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ProductCategory"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#ProductDescription"/>
     </Declaration>
     <Declaration>
@@ -110,7 +116,13 @@
         <DataProperty IRI="#ProductName"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#ProductOwner"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#ProductPrice"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ProductQuantity"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#SubscriptionType"/>
@@ -125,6 +137,30 @@
         <NamedIndividual IRI="#BasicTier"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#Order_Number_2fdb626a-e193-4355-ace7-71a5ad28af85"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Order_Number_6be81c46-e772-4191-b743-e5ea1c66fa67"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Order_Number_71f45d10-965a-49a1-a359-3e1cd5b8b258"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Order_Number_96207010-8d3a-48b8-b129-b5537eee70d1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Order_Number_9fb700c8-a87f-4a99-a5aa-d6d4424d5da4"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Order_Number_b731ca6f-e14a-4798-8458-11da71a2fb11"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Order_Number_bff8a3ed-2fd5-4660-a4fc-30063590ef13"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Order_Number_e03f2656-99a2-4a48-9ee0-e763eeb81b49"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#PremiumTier"/>
     </Declaration>
     <Declaration>
@@ -134,10 +170,37 @@
         <NamedIndividual IRI="#StandartTier"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#1@abv.bg"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#2@abv.bg"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#3@abv.bg"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#4@abv.bg"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#811b3870-d70a-4bbb-a516-4928d7f647da"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#a@abv.bg"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#d@abv.bg"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#test@e.com"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#test@1e.com"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#test_1@abv.bg"/>
     </Declaration>
     <SubClassOf>
         <Class IRI="#BasicTier"/>
@@ -240,23 +303,15 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Order"/>
-        <NamedIndividual IRI="#Order_Number_06461b81-0d73-45e3-8f5e-bf211528bb7b"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Order"/>
-        <NamedIndividual IRI="#Order_Number_2dc8d715-e133-48d3-bb76-4a5c45f45536"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Order"/>
         <NamedIndividual IRI="#Order_Number_2fdb626a-e193-4355-ace7-71a5ad28af85"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Order"/>
-        <NamedIndividual IRI="#Order_Number_322ea712-fe5e-4858-aa72-5486103d63e0"/>
+        <NamedIndividual IRI="#Order_Number_6be81c46-e772-4191-b743-e5ea1c66fa67"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Order"/>
-        <NamedIndividual IRI="#Order_Number_77d7426e-6a58-46a6-8d9c-0c69167d6a8c"/>
+        <NamedIndividual IRI="#Order_Number_71f45d10-965a-49a1-a359-3e1cd5b8b258"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Order"/>
@@ -264,7 +319,7 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Order"/>
-        <NamedIndividual IRI="#Order_Number_acb9fb70-5339-4474-808f-63a9d4f33711"/>
+        <NamedIndividual IRI="#Order_Number_9fb700c8-a87f-4a99-a5aa-d6d4424d5da4"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Order"/>
@@ -272,23 +327,11 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Order"/>
-        <NamedIndividual IRI="#Order_Number_bf38622c-90a6-43e7-9eb5-3c4dd61f58ba"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Order"/>
-        <NamedIndividual IRI="#Order_Number_cb4ab83f-42d3-4f2e-b4f7-e815caf40017"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Order"/>
-        <NamedIndividual IRI="#Order_Number_d9191b19-2b22-47ba-9323-cf1bf1056f04"/>
+        <NamedIndividual IRI="#Order_Number_bff8a3ed-2fd5-4660-a4fc-30063590ef13"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Order"/>
         <NamedIndividual IRI="#Order_Number_e03f2656-99a2-4a48-9ee0-e763eeb81b49"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Order"/>
-        <NamedIndividual IRI="#Order_Number_e8a0772d-e653-4a88-920e-50a7809334ca"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#PremiumTier"/>
@@ -309,6 +352,14 @@
     <ClassAssertion>
         <Class IRI="#Tier"/>
         <NamedIndividual IRI="#StandartTier"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Product"/>
+        <NamedIndividual IRI="#e7ff85d8-ae22-44c9-a7e4-f8868449d691"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Product"/>
+        <NamedIndividual IRI="#f9b17f30-8281-48b5-933e-b29e864c71ac"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#User"/>
@@ -336,6 +387,10 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#User"/>
+        <NamedIndividual IRI="#d@abv.bg"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#User"/>
         <NamedIndividual IRI="#test@e.com"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -353,26 +408,6 @@
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderCustomer"/>
-        <NamedIndividual IRI="#Order_Number_06461b81-0d73-45e3-8f5e-bf211528bb7b"/>
-        <NamedIndividual IRI="#a@abv.bg"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderProduct"/>
-        <NamedIndividual IRI="#Order_Number_06461b81-0d73-45e3-8f5e-bf211528bb7b"/>
-        <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderCustomer"/>
-        <NamedIndividual IRI="#Order_Number_2dc8d715-e133-48d3-bb76-4a5c45f45536"/>
-        <NamedIndividual IRI="#a@abv.bg"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderProduct"/>
-        <NamedIndividual IRI="#Order_Number_2dc8d715-e133-48d3-bb76-4a5c45f45536"/>
-        <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderCustomer"/>
         <NamedIndividual IRI="#Order_Number_2fdb626a-e193-4355-ace7-71a5ad28af85"/>
         <NamedIndividual IRI="#test_1@abv.bg"/>
     </ObjectPropertyAssertion>
@@ -383,22 +418,22 @@
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderCustomer"/>
-        <NamedIndividual IRI="#Order_Number_322ea712-fe5e-4858-aa72-5486103d63e0"/>
+        <NamedIndividual IRI="#Order_Number_6be81c46-e772-4191-b743-e5ea1c66fa67"/>
         <NamedIndividual IRI="#a@abv.bg"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderProduct"/>
-        <NamedIndividual IRI="#Order_Number_322ea712-fe5e-4858-aa72-5486103d63e0"/>
+        <NamedIndividual IRI="#Order_Number_6be81c46-e772-4191-b743-e5ea1c66fa67"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderCustomer"/>
-        <NamedIndividual IRI="#Order_Number_77d7426e-6a58-46a6-8d9c-0c69167d6a8c"/>
+        <NamedIndividual IRI="#Order_Number_71f45d10-965a-49a1-a359-3e1cd5b8b258"/>
         <NamedIndividual IRI="#a@abv.bg"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderProduct"/>
-        <NamedIndividual IRI="#Order_Number_77d7426e-6a58-46a6-8d9c-0c69167d6a8c"/>
+        <NamedIndividual IRI="#Order_Number_71f45d10-965a-49a1-a359-3e1cd5b8b258"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
@@ -413,12 +448,12 @@
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderCustomer"/>
-        <NamedIndividual IRI="#Order_Number_acb9fb70-5339-4474-808f-63a9d4f33711"/>
+        <NamedIndividual IRI="#Order_Number_9fb700c8-a87f-4a99-a5aa-d6d4424d5da4"/>
         <NamedIndividual IRI="#a@abv.bg"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderProduct"/>
-        <NamedIndividual IRI="#Order_Number_acb9fb70-5339-4474-808f-63a9d4f33711"/>
+        <NamedIndividual IRI="#Order_Number_9fb700c8-a87f-4a99-a5aa-d6d4424d5da4"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
@@ -433,32 +468,12 @@
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderCustomer"/>
-        <NamedIndividual IRI="#Order_Number_bf38622c-90a6-43e7-9eb5-3c4dd61f58ba"/>
+        <NamedIndividual IRI="#Order_Number_bff8a3ed-2fd5-4660-a4fc-30063590ef13"/>
         <NamedIndividual IRI="#a@abv.bg"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderProduct"/>
-        <NamedIndividual IRI="#Order_Number_bf38622c-90a6-43e7-9eb5-3c4dd61f58ba"/>
-        <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderCustomer"/>
-        <NamedIndividual IRI="#Order_Number_cb4ab83f-42d3-4f2e-b4f7-e815caf40017"/>
-        <NamedIndividual IRI="#a@abv.bg"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderProduct"/>
-        <NamedIndividual IRI="#Order_Number_cb4ab83f-42d3-4f2e-b4f7-e815caf40017"/>
-        <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderCustomer"/>
-        <NamedIndividual IRI="#Order_Number_d9191b19-2b22-47ba-9323-cf1bf1056f04"/>
-        <NamedIndividual IRI="#a@abv.bg"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderProduct"/>
-        <NamedIndividual IRI="#Order_Number_d9191b19-2b22-47ba-9323-cf1bf1056f04"/>
+        <NamedIndividual IRI="#Order_Number_bff8a3ed-2fd5-4660-a4fc-30063590ef13"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
@@ -469,16 +484,6 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasOrderProduct"/>
         <NamedIndividual IRI="#Order_Number_e03f2656-99a2-4a48-9ee0-e763eeb81b49"/>
-        <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderCustomer"/>
-        <NamedIndividual IRI="#Order_Number_e8a0772d-e653-4a88-920e-50a7809334ca"/>
-        <NamedIndividual IRI="#a@abv.bg"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasOrderProduct"/>
-        <NamedIndividual IRI="#Order_Number_e8a0772d-e653-4a88-920e-50a7809334ca"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
@@ -518,6 +523,11 @@
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasSubscription"/>
+        <NamedIndividual IRI="#d@abv.bg"/>
+        <NamedIndividual IRI="#BasicTier"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasSubscription"/>
         <NamedIndividual IRI="#test@e.com"/>
         <NamedIndividual IRI="#BasicTier"/>
     </ObjectPropertyAssertion>
@@ -533,233 +543,263 @@
     </ObjectPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderDate"/>
-        <NamedIndividual IRI="#Order_Number_06461b81-0d73-45e3-8f5e-bf211528bb7b"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:40:02.489414400</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#OrderNumber"/>
-        <NamedIndividual IRI="#Order_Number_06461b81-0d73-45e3-8f5e-bf211528bb7b"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">06461b81-0d73-45e3-8f5e-bf211528bb7b</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#OrderDate"/>
-        <NamedIndividual IRI="#Order_Number_2dc8d715-e133-48d3-bb76-4a5c45f45536"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:40:03.238904800</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#OrderNumber"/>
-        <NamedIndividual IRI="#Order_Number_2dc8d715-e133-48d3-bb76-4a5c45f45536"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2dc8d715-e133-48d3-bb76-4a5c45f45536</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#OrderDate"/>
         <NamedIndividual IRI="#Order_Number_2fdb626a-e193-4355-ace7-71a5ad28af85"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:36:40.007226</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2023-05-27T16:36:40.007226</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderNumber"/>
         <NamedIndividual IRI="#Order_Number_2fdb626a-e193-4355-ace7-71a5ad28af85"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2fdb626a-e193-4355-ace7-71a5ad28af85</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2fdb626a-e193-4355-ace7-71a5ad28af85</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderDate"/>
-        <NamedIndividual IRI="#Order_Number_322ea712-fe5e-4858-aa72-5486103d63e0"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-25T01:19:38.355632900</Literal>
+        <NamedIndividual IRI="#Order_Number_6be81c46-e772-4191-b743-e5ea1c66fa67"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2023-05-28T16:18:46.379940100</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderNumber"/>
-        <NamedIndividual IRI="#Order_Number_322ea712-fe5e-4858-aa72-5486103d63e0"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">322ea712-fe5e-4858-aa72-5486103d63e0</Literal>
+        <NamedIndividual IRI="#Order_Number_6be81c46-e772-4191-b743-e5ea1c66fa67"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">6be81c46-e772-4191-b743-e5ea1c66fa67</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderDate"/>
-        <NamedIndividual IRI="#Order_Number_77d7426e-6a58-46a6-8d9c-0c69167d6a8c"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:40:02.871351400</Literal>
+        <NamedIndividual IRI="#Order_Number_71f45d10-965a-49a1-a359-3e1cd5b8b258"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2023-05-28T16:18:45.456255500</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderNumber"/>
-        <NamedIndividual IRI="#Order_Number_77d7426e-6a58-46a6-8d9c-0c69167d6a8c"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">77d7426e-6a58-46a6-8d9c-0c69167d6a8c</Literal>
+        <NamedIndividual IRI="#Order_Number_71f45d10-965a-49a1-a359-3e1cd5b8b258"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">71f45d10-965a-49a1-a359-3e1cd5b8b258</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderDate"/>
         <NamedIndividual IRI="#Order_Number_96207010-8d3a-48b8-b129-b5537eee70d1"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:36:39.188752300</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2023-05-27T16:36:39.188752300</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderNumber"/>
         <NamedIndividual IRI="#Order_Number_96207010-8d3a-48b8-b129-b5537eee70d1"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">96207010-8d3a-48b8-b129-b5537eee70d1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">96207010-8d3a-48b8-b129-b5537eee70d1</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderDate"/>
-        <NamedIndividual IRI="#Order_Number_acb9fb70-5339-4474-808f-63a9d4f33711"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:40:02.594387600</Literal>
+        <NamedIndividual IRI="#Order_Number_9fb700c8-a87f-4a99-a5aa-d6d4424d5da4"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2023-05-28T16:14:04.400725200</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderNumber"/>
-        <NamedIndividual IRI="#Order_Number_acb9fb70-5339-4474-808f-63a9d4f33711"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">acb9fb70-5339-4474-808f-63a9d4f33711</Literal>
+        <NamedIndividual IRI="#Order_Number_9fb700c8-a87f-4a99-a5aa-d6d4424d5da4"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">9fb700c8-a87f-4a99-a5aa-d6d4424d5da4</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderDate"/>
         <NamedIndividual IRI="#Order_Number_b731ca6f-e14a-4798-8458-11da71a2fb11"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:36:40.709123500</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2023-05-27T16:36:40.709123500</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderNumber"/>
         <NamedIndividual IRI="#Order_Number_b731ca6f-e14a-4798-8458-11da71a2fb11"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">b731ca6f-e14a-4798-8458-11da71a2fb11</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">b731ca6f-e14a-4798-8458-11da71a2fb11</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderDate"/>
-        <NamedIndividual IRI="#Order_Number_bf38622c-90a6-43e7-9eb5-3c4dd61f58ba"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:40:02.337014800</Literal>
+        <NamedIndividual IRI="#Order_Number_bff8a3ed-2fd5-4660-a4fc-30063590ef13"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2023-05-28T16:18:46.151381500</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderNumber"/>
-        <NamedIndividual IRI="#Order_Number_bf38622c-90a6-43e7-9eb5-3c4dd61f58ba"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">bf38622c-90a6-43e7-9eb5-3c4dd61f58ba</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#OrderDate"/>
-        <NamedIndividual IRI="#Order_Number_cb4ab83f-42d3-4f2e-b4f7-e815caf40017"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:40:03.426972900</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#OrderNumber"/>
-        <NamedIndividual IRI="#Order_Number_cb4ab83f-42d3-4f2e-b4f7-e815caf40017"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">cb4ab83f-42d3-4f2e-b4f7-e815caf40017</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#OrderDate"/>
-        <NamedIndividual IRI="#Order_Number_d9191b19-2b22-47ba-9323-cf1bf1056f04"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:40:02.738857800</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#OrderNumber"/>
-        <NamedIndividual IRI="#Order_Number_d9191b19-2b22-47ba-9323-cf1bf1056f04"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">d9191b19-2b22-47ba-9323-cf1bf1056f04</Literal>
+        <NamedIndividual IRI="#Order_Number_bff8a3ed-2fd5-4660-a4fc-30063590ef13"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">bff8a3ed-2fd5-4660-a4fc-30063590ef13</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderDate"/>
         <NamedIndividual IRI="#Order_Number_e03f2656-99a2-4a48-9ee0-e763eeb81b49"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:36:41.380914300</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2023-05-27T16:36:41.380914300</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#OrderNumber"/>
         <NamedIndividual IRI="#Order_Number_e03f2656-99a2-4a48-9ee0-e763eeb81b49"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">e03f2656-99a2-4a48-9ee0-e763eeb81b49</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">e03f2656-99a2-4a48-9ee0-e763eeb81b49</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#OrderDate"/>
-        <NamedIndividual IRI="#Order_Number_e8a0772d-e653-4a88-920e-50a7809334ca"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2023-05-27T16:40:03.379100900</Literal>
+        <DataProperty IRI="#ProductCategory"/>
+        <NamedIndividual IRI="#e7ff85d8-ae22-44c9-a7e4-f8868449d691"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Clothing</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#OrderNumber"/>
-        <NamedIndividual IRI="#Order_Number_e8a0772d-e653-4a88-920e-50a7809334ca"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">e8a0772d-e653-4a88-920e-50a7809334ca</Literal>
+        <DataProperty IRI="#ProductDescription"/>
+        <NamedIndividual IRI="#e7ff85d8-ae22-44c9-a7e4-f8868449d691"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">A nice dress for dinner</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductId"/>
+        <NamedIndividual IRI="#e7ff85d8-ae22-44c9-a7e4-f8868449d691"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">e7ff85d8-ae22-44c9-a7e4-f8868449d691</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductImage"/>
+        <NamedIndividual IRI="#e7ff85d8-ae22-44c9-a7e4-f8868449d691"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">image_1685399058146.jpg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductName"/>
+        <NamedIndividual IRI="#e7ff85d8-ae22-44c9-a7e4-f8868449d691"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Dinner Dress Black</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductOwner"/>
+        <NamedIndividual IRI="#e7ff85d8-ae22-44c9-a7e4-f8868449d691"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">test_1@abv.bg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductPrice"/>
+        <NamedIndividual IRI="#e7ff85d8-ae22-44c9-a7e4-f8868449d691"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">29.69</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductQuantity"/>
+        <NamedIndividual IRI="#e7ff85d8-ae22-44c9-a7e4-f8868449d691"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductCategory"/>
+        <NamedIndividual IRI="#f9b17f30-8281-48b5-933e-b29e864c71ac"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Clothing</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductDescription"/>
+        <NamedIndividual IRI="#f9b17f30-8281-48b5-933e-b29e864c71ac"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Some black dress</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductId"/>
+        <NamedIndividual IRI="#f9b17f30-8281-48b5-933e-b29e864c71ac"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">f9b17f30-8281-48b5-933e-b29e864c71ac</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductImage"/>
+        <NamedIndividual IRI="#f9b17f30-8281-48b5-933e-b29e864c71ac"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">image_1685398962387.jpg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductName"/>
+        <NamedIndividual IRI="#f9b17f30-8281-48b5-933e-b29e864c71ac"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Black Dress</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductOwner"/>
+        <NamedIndividual IRI="#f9b17f30-8281-48b5-933e-b29e864c71ac"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">a@abv.bg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductPrice"/>
+        <NamedIndividual IRI="#f9b17f30-8281-48b5-933e-b29e864c71ac"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">27.99</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductQuantity"/>
+        <NamedIndividual IRI="#f9b17f30-8281-48b5-933e-b29e864c71ac"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">7</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Email"/>
         <NamedIndividual IRI="#1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">1@abv.bg</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">1@abv.bg</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#FirstName"/>
         <NamedIndividual IRI="#1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">1</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#LastName"/>
         <NamedIndividual IRI="#1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">1</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Password"/>
         <NamedIndividual IRI="#1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">ab8450cd5ee2a4e4c5a4fb53f70505ec2f1d5af56f05ae68c63ea276dd1512dd</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">ab8450cd5ee2a4e4c5a4fb53f70505ec2f1d5af56f05ae68c63ea276dd1512dd</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#PasswordSalt"/>
         <NamedIndividual IRI="#1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">366cce7a70987d4e9379cb632d3c8ba9</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">366cce7a70987d4e9379cb632d3c8ba9</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#SubscriptionType"/>
         <NamedIndividual IRI="#1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BasicTier</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">BasicTier</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Username"/>
         <NamedIndividual IRI="#1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">1</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Email"/>
         <NamedIndividual IRI="#2@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2@abv.bg</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2@abv.bg</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#FirstName"/>
         <NamedIndividual IRI="#2@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#LastName"/>
         <NamedIndividual IRI="#2@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Password"/>
         <NamedIndividual IRI="#2@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">ea07904162dcea2ae558097ba557c72f4d2da168182ef18baf58f5016cfc0903</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">ea07904162dcea2ae558097ba557c72f4d2da168182ef18baf58f5016cfc0903</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#PasswordSalt"/>
         <NamedIndividual IRI="#2@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">54f58e8d0b197b5c971edf82597ce313</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">54f58e8d0b197b5c971edf82597ce313</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#SubscriptionType"/>
         <NamedIndividual IRI="#2@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BasicTier</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">BasicTier</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Username"/>
         <NamedIndividual IRI="#2@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ProductCategory"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Shoes</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Shoes</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ProductDescription"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">5522</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">5522</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ProductId"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">3dc8be53-86ba-4eed-b7a8-18245d54b06a</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">3dc8be53-86ba-4eed-b7a8-18245d54b06a</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ProductImage"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">image_1684935986281.jpg</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">image_1684935986281.jpg</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ProductName"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Shoes</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Shoes</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ProductOwner"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">a@abv.bg</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">a@abv.bg</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ProductPrice"/>
@@ -769,112 +809,173 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#ProductQuantity"/>
         <NamedIndividual IRI="#3dc8be53-86ba-4eed-b7a8-18245d54b06a"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Email"/>
         <NamedIndividual IRI="#3@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">3@abv.bg</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">3@abv.bg</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#FirstName"/>
         <NamedIndividual IRI="#3@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">3</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">3</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#LastName"/>
         <NamedIndividual IRI="#3@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">3</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">3</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Password"/>
         <NamedIndividual IRI="#3@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">3ad40710a5aed670636215f1538a7c47c0ba9f6270ac8e3666088f7109783ef5</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">3ad40710a5aed670636215f1538a7c47c0ba9f6270ac8e3666088f7109783ef5</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#PasswordSalt"/>
         <NamedIndividual IRI="#3@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">284de080d0ab544ae6213197d3a7d29f</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">284de080d0ab544ae6213197d3a7d29f</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#SubscriptionType"/>
         <NamedIndividual IRI="#3@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BasicTier</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">BasicTier</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Username"/>
         <NamedIndividual IRI="#3@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">3</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">3</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Email"/>
         <NamedIndividual IRI="#4@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">4@abv.bg</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">4@abv.bg</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#FirstName"/>
         <NamedIndividual IRI="#4@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">4</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">4</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#LastName"/>
         <NamedIndividual IRI="#4@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">4</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">4</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Password"/>
         <NamedIndividual IRI="#4@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2b38305bf193d399d37eac712c995aa8f1819daf5d285aca997ddb2d518207ac</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">2b38305bf193d399d37eac712c995aa8f1819daf5d285aca997ddb2d518207ac</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#PasswordSalt"/>
         <NamedIndividual IRI="#4@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">f099fc2ed0cd89bfa488992d074b4194</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">f099fc2ed0cd89bfa488992d074b4194</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#SubscriptionType"/>
         <NamedIndividual IRI="#4@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BasicTier</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">BasicTier</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Username"/>
         <NamedIndividual IRI="#4@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">44</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">44</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductCategory"/>
+        <NamedIndividual IRI="#811b3870-d70a-4bbb-a516-4928d7f647da"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Apparel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductDescription"/>
+        <NamedIndividual IRI="#811b3870-d70a-4bbb-a516-4928d7f647da"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Some Black dress from my drawer. New Description 2
+</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductImage"/>
+        <NamedIndividual IRI="#811b3870-d70a-4bbb-a516-4928d7f647da"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">image_1685287943001.jpg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductName"/>
+        <NamedIndividual IRI="#811b3870-d70a-4bbb-a516-4928d7f647da"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Black Dress Edited 2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ProductPrice"/>
+        <NamedIndividual IRI="#811b3870-d70a-4bbb-a516-4928d7f647da"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">32.28</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Email"/>
         <NamedIndividual IRI="#a@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">a@abv.bg</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">a@abv.bg</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#FirstName"/>
         <NamedIndividual IRI="#a@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Daren1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Daren1</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#LastName"/>
         <NamedIndividual IRI="#a@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Stoev1</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Stoev1</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Password"/>
         <NamedIndividual IRI="#a@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">e66717edcf8b898ad6b261141bd68edf311677cc75622f6f6d5a6db35e18646a</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">e66717edcf8b898ad6b261141bd68edf311677cc75622f6f6d5a6db35e18646a</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#PasswordSalt"/>
         <NamedIndividual IRI="#a@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">9f7f7de215d230f22b971992a6e9b2cc</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">9f7f7de215d230f22b971992a6e9b2cc</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#SubscriptionType"/>
         <NamedIndividual IRI="#a@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BasicTier</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">BasicTier</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Username"/>
         <NamedIndividual IRI="#a@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">daren</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">daren</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Email"/>
+        <NamedIndividual IRI="#d@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">d@abv.bg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#FirstName"/>
+        <NamedIndividual IRI="#d@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">debug</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#LastName"/>
+        <NamedIndividual IRI="#d@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">debug</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Password"/>
+        <NamedIndividual IRI="#d@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">11e15cd52eeabcd8b416bb871ef29ec2736883ef2e996e12e185ec3c1abee7ba</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#PasswordSalt"/>
+        <NamedIndividual IRI="#d@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">4ee05a9875a142f38312f74b9751dbd2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SubscriptionType"/>
+        <NamedIndividual IRI="#d@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BasicTier</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Username"/>
+        <NamedIndividual IRI="#d@abv.bg"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">debug</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Email"/>
@@ -984,32 +1085,32 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#FirstName"/>
         <NamedIndividual IRI="#test_1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Nasko</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Vasko</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#LastName"/>
         <NamedIndividual IRI="#test_1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Vasilev</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Petrov</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Password"/>
         <NamedIndividual IRI="#test_1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">2d6284e227a2d0cfd8264478b4f7eebba8c6360966fe84995ebf73b39bfcdc2f</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">d3f8a3a52fa693c4c4f6070ed8ed54358020a58263ee4ee7c9d59f65ce808ab4</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#PasswordSalt"/>
         <NamedIndividual IRI="#test_1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">4a14d02a4ab3409340ca99bbeb3a3344</Literal>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">4a14d02a4ab3409340ca99bbeb3a3344</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#SubscriptionType"/>
         <NamedIndividual IRI="#test_1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BasicTier</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">StandardTier</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#Username"/>
         <NamedIndividual IRI="#test_1@abv.bg"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Darkness4</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Darkness7</Literal>
     </DataPropertyAssertion>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasOrderCustomer"/>
@@ -1175,6 +1276,10 @@
         <DataProperty abbreviatedIRI="owl:topDataProperty"/>
     </SubDataPropertyOf>
     <SubDataPropertyOf>
+        <DataProperty IRI="#ProductQuantity"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
         <DataProperty IRI="#UserName"/>
         <DataProperty abbreviatedIRI="owl:topDataProperty"/>
     </SubDataPropertyOf>
@@ -1232,6 +1337,10 @@
         <Class IRI="#Product"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#ProductQuantity"/>
+        <Class IRI="#Product"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#UserName"/>
         <Class IRI="#User"/>
     </DataPropertyDomain>
@@ -1270,6 +1379,10 @@
     <DataPropertyRange>
         <DataProperty IRI="#ProductPrice"/>
         <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ProductQuantity"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#UserName"/>

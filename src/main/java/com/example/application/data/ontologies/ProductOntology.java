@@ -14,6 +14,7 @@ import org.semanticweb.owlapi.util.OWLEntityRemover;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ProductOntology {
     private OWLOntology ontology;
@@ -124,52 +125,47 @@ public class ProductOntology {
 
 
     public void removeProduct(Product product) {
-        OWLClass productToRemove = dataFactory.getOWLClass(product.getIndividualIRI(ontologyIRIStr));
-
+        OWLNamedIndividual productToRemove = dataFactory.getOWLNamedIndividual(product.getIndividualIRI(ontologyIRIStr));
         OWLEntityRemover remover = new OWLEntityRemover(ontologyManager, Collections.singleton(ontology));
 
+        // Visit the OWLIndividual representing the Order
         productToRemove.accept(remover);
 
         ontologyManager.applyChanges(remover.getChanges());
 
         saveOntology();
+        reasoner.flush();
 
     }
 
     public Product getProductById(String id) {
         OWLClass productClass = dataFactory.getOWLClass(IRI.create(ontologyIRIStr + "Product"));
-        OWLDataProperty idProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductId"));
-        OWLDataProperty nameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductName"));
-        OWLDataProperty descriptionProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductDescription"));
-        OWLDataProperty priceProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductPrice"));
-        OWLDataProperty imageProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductImage"));
-        OWLDataProperty ownerProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductOwner"));
-        OWLDataProperty categoryProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductCategory"));
-        OWLDataProperty quantityProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductQuantity"));
-        OWLIndividual individualId = dataFactory.getOWLNamedIndividual(IRI.create(ontologyIRIStr + id));
 
+        List<String> dataPropertyNames = Arrays.asList(
+                "ProductId", "ProductName", "ProductDescription", "ProductPrice", "ProductImage", "ProductOwner",
+                "ProductCategory", "ProductQuantity"
+        );
+        Map<String, OWLDataProperty> dataProperties = getDataProperties(dataPropertyNames);
 
-
-        OWLDataPropertyAssertionAxiom idAxiom = dataFactory.getOWLDataPropertyAssertionAxiom(idProperty, individualId, dataFactory.getOWLLiteral(id));
 
         Set<OWLNamedIndividual> individuals = ontology.getIndividualsInSignature();
-        OWLNamedIndividual productIndividual = null;
 
 
         for (OWLNamedIndividual individual : individuals) {
-            Set<OWLIndividualAxiom> axioms = ontology.getAxioms(individual);
-            if (axioms.contains(idAxiom)) {
+            String individualId = retrieveDataPropertyValue(individual,  dataProperties.get("ProductId"));
+
+            // Check if the email property value matches the given email
+            if (id.equals(individualId))  {
                 Set<OWLClassExpression> types = individual.getTypes(ontology);
                 if (types.contains(productClass)) {
-                    String productId = retrieveDataPropertyValue(individual, idProperty);
-                    String productName = retrieveDataPropertyValue(individual, nameProperty);
-                    String description = retrieveDataPropertyValue(individual, descriptionProperty);
-                    Double price =Double.parseDouble(retrieveDataPropertyValue(individual, priceProperty));
-                    String imageUrl = retrieveDataPropertyValue(individual, imageProperty);
-                    String owner_email = retrieveDataPropertyValue(individual, ownerProperty);
-
-                    String category = retrieveDataPropertyValue(individual, categoryProperty);
-                    Integer quantity = Integer.parseInt(retrieveDataPropertyValue(individual, quantityProperty));
+                    String productId = retrieveDataPropertyValue(individual, dataProperties.get("ProductId"));
+                    String productName = retrieveDataPropertyValue(individual, dataProperties.get("ProductName"));
+                    String description = retrieveDataPropertyValue(individual, dataProperties.get("ProductDescription"));
+                    Double price = Double.parseDouble(retrieveDataPropertyValue(individual, dataProperties.get("ProductPrice")));
+                    String imageUrl = retrieveDataPropertyValue(individual, dataProperties.get("ProductImage"));
+                    String owner_email = retrieveDataPropertyValue(individual, dataProperties.get("ProductOwner"));
+                    String category = retrieveDataPropertyValue(individual, dataProperties.get("ProductCategory"));
+                    Integer quantity = Integer.parseInt(retrieveDataPropertyValue(individual, dataProperties.get("ProductQuantity")));
 
 
                     // Retrieve customer object property values
@@ -184,25 +180,31 @@ public class ProductOntology {
         System.out.println("Product data not found for id: " + id);
         return null;
     }
+
+    private Map<String, OWLDataProperty> getDataProperties(List<String> propertyNames) {
+        Map<String, OWLDataProperty> dataProperties = new HashMap<>();
+        for (String propertyName : propertyNames) {
+            OWLDataProperty property = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + propertyName));
+            dataProperties.put(propertyName, property);
+        }
+        return dataProperties;
+    }
     public Product getProductFromIndividual(OWLNamedIndividual productIndividual) {
-        OWLDataProperty idProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductId"));
-        OWLDataProperty nameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductName"));
-        OWLDataProperty descriptionProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductDescription"));
-        OWLDataProperty priceProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductPrice"));
-        OWLDataProperty imageProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductImage"));
-        OWLDataProperty ownerProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductOwner"));
-        OWLDataProperty categoryProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductCategory"));
-        OWLDataProperty quantityProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductQuantity"));
+        List<String> dataPropertyNames = Arrays.asList(
+                "ProductId", "ProductName", "ProductDescription", "ProductPrice", "ProductImage", "ProductOwner",
+                "ProductCategory", "ProductQuantity"
+        );
+        Map<String, OWLDataProperty> dataProperties = getDataProperties(dataPropertyNames);
         // Add more properties as needed
 
-        String productId = retrieveDataPropertyValue(productIndividual, idProperty);
-        String productName = retrieveDataPropertyValue(productIndividual, nameProperty);
-        String description = retrieveDataPropertyValue(productIndividual, descriptionProperty);
-        Double price =Double.parseDouble(retrieveDataPropertyValue(productIndividual, priceProperty));
-        String imageUrl = retrieveDataPropertyValue(productIndividual, imageProperty);
-        String owner_email = retrieveDataPropertyValue(productIndividual, ownerProperty);
-        String category = retrieveDataPropertyValue(productIndividual, categoryProperty);
-        Integer quantity = Integer.parseInt(retrieveDataPropertyValue(productIndividual, quantityProperty));
+        String productId = retrieveDataPropertyValue(productIndividual, dataProperties.get("ProductId"));
+        String productName = retrieveDataPropertyValue(productIndividual, dataProperties.get("ProductName"));
+        String description = retrieveDataPropertyValue(productIndividual, dataProperties.get("ProductDescription"));
+        Double price = Double.parseDouble(retrieveDataPropertyValue(productIndividual, dataProperties.get("ProductPrice")));
+        String imageUrl = retrieveDataPropertyValue(productIndividual, dataProperties.get("ProductImage"));
+        String owner_email = retrieveDataPropertyValue(productIndividual, dataProperties.get("ProductOwner"));
+        String category = retrieveDataPropertyValue(productIndividual, dataProperties.get("ProductCategory"));
+        Integer quantity = Integer.parseInt(retrieveDataPropertyValue(productIndividual, dataProperties.get("ProductQuantity")));
         // Retrieve customer object property values
         Customer owner = customerOntology.getCustomer(owner_email);
         // Create Customer object and add it to the list
@@ -211,15 +213,15 @@ public class ProductOntology {
     }
 
     public ArrayList<Product> getAllProducts() {
+        reasoner.flush();
         OWLClass productClass = dataFactory.getOWLClass(IRI.create(ontologyIRIStr + "Product"));
-        OWLDataProperty idProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductId"));
-        OWLDataProperty nameProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductName"));
-        OWLDataProperty descriptionProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductDescription"));
-        OWLDataProperty priceProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductPrice"));
-        OWLDataProperty imageProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductImage"));
-        OWLDataProperty ownerProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductOwner"));
-        OWLDataProperty categoryProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductCategory"));
-        OWLDataProperty quantityProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductQuantity"));
+        List<String> dataPropertyNames = Arrays.asList(
+                "ProductId", "ProductName", "ProductDescription", "ProductPrice", "ProductImage", "ProductOwner",
+                "ProductCategory", "ProductQuantity"
+        );
+        Map<String, OWLDataProperty> dataProperties = getDataProperties(dataPropertyNames);
+        // Add more properties as needed
+
 
         ArrayList<Product> products = new ArrayList<>();
 
@@ -228,15 +230,17 @@ public class ProductOntology {
             Set<OWLClassExpression> types = individual.getTypes(ontology);
             if (types.contains(productClass)) {
                 // Retrieve product data from individual
-                String productId = retrieveDataPropertyValue(individual, idProperty);
-                String productName = retrieveDataPropertyValue(individual, nameProperty);
-                String description = retrieveDataPropertyValue(individual, descriptionProperty);
-                Double price =Double.parseDouble(retrieveDataPropertyValue(individual, priceProperty));
-                String imageUrl = retrieveDataPropertyValue(individual, imageProperty);
-                String owner_email = retrieveDataPropertyValue(individual, ownerProperty);
-
-                String category = retrieveDataPropertyValue(individual, categoryProperty);
-                Integer quantity = Integer.parseInt(retrieveDataPropertyValue(individual, quantityProperty));
+                String productId = retrieveDataPropertyValue(individual, dataProperties.get("ProductId"));
+                String productName = retrieveDataPropertyValue(individual, dataProperties.get("ProductName"));
+                String description = retrieveDataPropertyValue(individual, dataProperties.get("ProductDescription"));
+                Double price = Double.parseDouble(retrieveDataPropertyValue(individual, dataProperties.get("ProductPrice")));
+                String imageUrl = retrieveDataPropertyValue(individual, dataProperties.get("ProductImage"));
+                String owner_email = retrieveDataPropertyValue(individual, dataProperties.get("ProductOwner"));
+                String category = retrieveDataPropertyValue(individual, dataProperties.get("ProductCategory"));
+                Integer quantity = 1;
+                if ( dataProperties.get("ProductQuantity") != null &&  !dataProperties.get("ProductQuantity").toString().isEmpty()) {
+                    quantity = Integer.parseInt(retrieveDataPropertyValue(individual, dataProperties.get("ProductQuantity")));;
+                }
 
 
                 // Retrieve customer object property values
@@ -258,7 +262,7 @@ public class ProductOntology {
         return "";
     }
 
-    public void updateProductOntology(Product product) {
+    public void updateProduct(Product product) {
         // Get the existing individual for the product
         IRI productIRI = product.getIndividualIRI(ontologyIRIStr);
         OWLIndividual productIndividual = dataFactory.getOWLNamedIndividual(productIRI);
@@ -269,6 +273,11 @@ public class ProductOntology {
         OWLDataProperty priceProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductPrice"));
         OWLDataProperty imageProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductImage"));
         OWLDataProperty categoryProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductCategory"));
+        OWLDataProperty quantityProperty = dataFactory.getOWLDataProperty(IRI.create(ontologyIRIStr + "ProductQuantity"));
+        List<String> dataPropertyNames = Arrays.asList(
+                "ProductName", "ProductDescription", "ProductPrice", "ProductImage", "ProductCategory", "ProductQuantity"
+        );
+        Map<String, OWLDataProperty> dataProperties = getDataProperties(dataPropertyNames);
 
         // Update the product's properties in the ontology
         OWLAxiom productName = dataFactory.getOWLDataPropertyAssertionAxiom(nameProperty, productIndividual, dataFactory.getOWLLiteral(product.getName()));
@@ -276,19 +285,29 @@ public class ProductOntology {
         OWLAxiom productPrice = dataFactory.getOWLDataPropertyAssertionAxiom(priceProperty, productIndividual, dataFactory.getOWLLiteral(product.getPrice()));
         OWLAxiom productImage = dataFactory.getOWLDataPropertyAssertionAxiom(imageProperty, productIndividual, dataFactory.getOWLLiteral(product.getImageUrl()));
         OWLAxiom productCategory = dataFactory.getOWLDataPropertyAssertionAxiom(categoryProperty, productIndividual, dataFactory.getOWLLiteral(product.getCategory()));
+        OWLAxiom productQuantity = dataFactory.getOWLDataPropertyAssertionAxiom(quantityProperty, productIndividual, dataFactory.getOWLLiteral(product.getQuantity()));
 
-        // Remove the old axioms for the properties (optional)
-        ontologyManager.removeAxioms(ontology, ontology.getAxioms(productIndividual));
+        Set<OWLAxiom> filteredAxioms = ontology.getDataPropertyAssertionAxioms(productIndividual).stream()
+                .filter(axiom -> axiom.getProperty().equals(nameProperty) ||
+                        axiom.getProperty().equals(descriptionProperty) ||
+                        axiom.getProperty().equals(priceProperty) ||
+                        axiom.getProperty().equals(imageProperty) ||
+                        axiom.getProperty().equals(categoryProperty) ||
+                        axiom.getProperty().equals(quantityProperty))
+                .collect(Collectors.toSet());
 
+        ontologyManager.removeAxioms(ontology, filteredAxioms);
         // Add the updated axioms to the ontology
         ontologyManager.addAxiom(ontology, productName);
         ontologyManager.addAxiom(ontology, productDescription);
         ontologyManager.addAxiom(ontology, productPrice);
         ontologyManager.addAxiom(ontology, productImage);
         ontologyManager.addAxiom(ontology, productCategory);
+        ontologyManager.addAxiom(ontology, productQuantity);
 
         // Save the ontology
         saveOntology();
+        reasoner.flush();
     }
 
 

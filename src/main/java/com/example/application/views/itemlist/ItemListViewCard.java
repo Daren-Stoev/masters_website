@@ -49,7 +49,7 @@ public class ItemListViewCard extends ListItem {
         Paragraph description = new Paragraph(product.getDescription());
         description.addClassNames(LumoUtility.Margin.Vertical.MEDIUM);
 
-        Paragraph price = new Paragraph("Price: " + product.getPrice());
+        Paragraph price = new Paragraph("Price: $" + product.getPrice());
         price.addClassNames(LumoUtility.Margin.Vertical.MEDIUM);
 
         Span badge = new Span();

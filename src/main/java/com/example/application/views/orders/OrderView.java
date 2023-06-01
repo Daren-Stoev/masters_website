@@ -1,6 +1,7 @@
 package com.example.application.views.orders;
 
 import com.example.application.data.entity.Customer;
+import com.example.application.data.entity.ImageUtils;
 import com.example.application.data.entity.Order;
 import com.example.application.data.entity.Product;
 import com.example.application.data.services.OrderService;
@@ -64,10 +65,10 @@ public class OrderView extends Main implements HasComponents, HasStyle, BeforeEn
 
     private Tab generateTable(String TabName,Boolean personal,String searchQuery) {
         Tab tab = new Tab(TabName);
+        ImageUtils imageUtils = new ImageUtils();
         VerticalLayout content = new VerticalLayout();
         List<Order> orders = fetchOrdersFromOntology(personal,searchQuery);
 
-        System.out.println("Orders in View " + orders.size());
         double totalPrice = orders.stream()
                 .mapToDouble(order -> order.getProduct().getPrice())
                 .sum();
@@ -84,18 +85,8 @@ public class OrderView extends Main implements HasComponents, HasStyle, BeforeEn
                 .setHeader("Product Name").setSortable(true);
 
         grid.addColumn(new ComponentRenderer<>(order -> {
-                String resourcePath = "src/files/images/products/" + order.getProduct().getImageUrl();
-                try {
-                    File imageFile = new File(resourcePath);
-                    FileInputStream fileInputStream = new FileInputStream(imageFile);
-                    StreamResource resource = new StreamResource(order.getProduct().getImageUrl(), () -> fileInputStream);
-                    Image image = new Image(resource, "Alt Text");
-                    image.setWidth("20%");
-                    return image;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                return new Image();
+            Image image = imageUtils.renderImage(order.getProduct().getImageUrl());
+            return image;
         }))
                 .setHeader("Product Image");
         grid.addColumn(Order::getDatetime).setHeader("Timestamp").setSortable(true);
@@ -127,7 +118,6 @@ public class OrderView extends Main implements HasComponents, HasStyle, BeforeEn
         List<Order> orders = new ArrayList<>();
         if(personal) {
             orders = orderService.getOrdersByCustomer(VaadinSession.getCurrent().getAttribute((Customer.class)));
-            System.out.println("orders personal: " + orders.size());
             if (searchQuery != null && !searchQuery.isEmpty())
             {
                 List<Product> products = orders.stream().map(Order::getProduct).collect(Collectors.toList());
@@ -139,12 +129,9 @@ public class OrderView extends Main implements HasComponents, HasStyle, BeforeEn
         // We fetch all products that this user has uploaded and then get all orders with each product
         else {
             List<Product> products = this.productService.getProductsByCustomer(VaadinSession.getCurrent().getAttribute((Customer.class)));
-            System.out.println("products: " + products.size());
             products = productService.filterByNameContainsIgnoreCase(products,searchQuery);
             for(Product product : products) {
-                System.out.println(product.getName());
                 ArrayList<Order> productOrders = orderService.getOrdersByProduct(product);
-                System.out.println("Product orders" + productOrders.size());
                 orders.addAll(productOrders);
             }
         }
