@@ -1,45 +1,80 @@
 package com.example.application.data.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import org.semanticweb.owlapi.model.IRI;
 
-@Entity
-@Table(name="Orders")
-public class Order extends AbstractEntity {
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CartId")
-    private Cart cart;
+public class Order {
 
-    public Cart getCart() {
-        return cart;
+    private Product product;
+    private Customer customer;
+    private LocalDateTime datetime;
+    private UUID orderNumber;
+
+    public Order(Product product, Customer customer) {
+
+        this.product = product;
+        this.customer = customer;
+        this.datetime = LocalDateTime.now();
+        this.orderNumber = generateOrderNumber();
+    }
+    public Order()
+    {
+
+    }
+    public Order(Product product, Customer customer, String datetime,UUID orderNumber) {
+        this.product = product;
+        this.customer = customer;
+        this.datetime = LocalDateTime.parse(datetime);
+        this.orderNumber = orderNumber;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public Product getProduct() {
+        return product;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ItemId")
-    private Item item;
-
-    public Item getItem() {
-        return item;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    private int quantity;
-
-    public int getQuantity() {
-        return quantity;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public LocalDateTime getDatetime() {
+        return datetime;
     }
 
+    public void setDatetime(LocalDateTime datetime) {
+        this.datetime = datetime;
+    }
+
+    public UUID getOrderNumber() {
+        return orderNumber;
+    }
+    public void setOrderNumber(UUID orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public UUID generateOrderNumber() {
+        return UUID.randomUUID();
+    }
+
+    public IRI getIndividualIRI(String OntologyIRIString)
+    {
+        return IRI.create(OntologyIRIString+"Order_Number_"+ orderNumber.toString());
+    }
+
+    public void printInfo() {
+        System.out.println("Product: " + product.getName());
+        System.out.println("Customer: " + customer.getUsername());
+        System.out.println("Datetime: " + datetime);
+        System.out.println("Order Number: " + orderNumber);
+    }
 }
 

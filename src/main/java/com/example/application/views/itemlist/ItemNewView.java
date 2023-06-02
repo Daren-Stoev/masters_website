@@ -1,36 +1,47 @@
 package com.example.application.views.itemlist;
 
-import com.example.application.data.entity.Item;
-import com.example.application.data.entity.Users;
-import com.example.application.data.service.ItemService;
+import com.example.application.data.entity.Customer;
+import com.example.application.data.entity.ImageUtils;
+import com.example.application.data.entity.Product;
+import com.example.application.data.services.ProductService;
 import com.example.application.views.MainLayout;
-import com.example.application.views.about.AboutView;
-import com.example.application.views.login.LoginView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
-import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.converter.StringToDoubleConverter;
+import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.data.validator.*;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.data.provider.ListDataProvider;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
+import static com.helger.commons.mock.CommonsAssert.assertEquals;
 
 @PageTitle("Item-new")
 @Route(value = "item-new", layout = MainLayout.class)
@@ -44,15 +55,21 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
     private TextField name;
     private TextArea description;
     private TextField price;
-    private TextField image;
+    private Upload imageUpload;
+    private ComboBox<String> category;
+    private TextField quantity;
+    private MemoryBuffer imageBuffer;
+
+    private String imageUrl;
+
     private  final Button cancelButton = new Button("Cancel");
     private  final Button saveButton = new Button("Save");
-    private final BeanValidationBinder<Item> binder;
-    private Item item;
-    private final ItemService itemService;
+    private final BeanValidationBinder<Product> binder;
+    private Product product;
+    private final ProductService productService;
 
-    public ItemNewView(ItemService itemService) {
-        this.itemService = itemService;
+    public ItemNewView(ProductService productService) {
+        this.productService = productService;
         addClassNames("item-new-view");
 
         // Create UI
@@ -60,7 +77,7 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 
 
-        binder = new BeanValidationBinder<>(Item.class);
+        binder = new BeanValidationBinder<>(Product.class);
 
         // Bind fields. This is where you'd define e.g. validation rules
 
@@ -85,36 +102,68 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
         Div editorDiv = new Div();
         editorDiv.setClassName("editor");
         editorLayoutDiv.add(editorDiv);
+        Div imageDiv = new Div();
+        imageDiv.setClassName("image");
+        imageDiv.setWidth("15%");
+        ImageUtils imageUtils = new ImageUtils();
 
         FormLayout formLayout = new FormLayout();
-        name = new TextField("Item Name");
+        name = new TextField("Product Name");
         name.setRequired(true);
         name.setRequiredIndicatorVisible(true);
         binder.forField(name).withValidator(new StringLengthValidator("Name must be between 3 and 50 characters",3,50))
-                        .bind(Item::getName,Item::setName);
-       /* price = new TextField("Price");
-        price.setRequired(true);
-        price.setRequiredIndicatorVisible(true);
-        binder.forField(price).withConverter(String::valueOf, Float::valueOf, "Please enter a valid number").withValidator(new DoubleRangeValidator("Price must be between 0 and 150000",0.0,150000.0))
-                        .bind(Item::getPrice, Item::setPrice);*/
+                        .bind(Product::getName,Product::setName);
         price = new TextField("Price");
         price.setRequired(true);
         price.setRequiredIndicatorVisible(true);
-        binder.forField(price);
         binder.forField(price).withConverter(new StringToDoubleConverter("Please Enter a Valid number"))
                 .withValidator(new DoubleRangeValidator("Price must be between 0 and 150000", 0.01, 150000.0))
-                .bind(Item::getPrice, Item::setPrice);
+                .bind(Product::getPrice, Product::setPrice);
 
         description = new TextArea("Description");
         description.setRequired(true);
         binder.forField(description)
                 .withValidator(new StringLengthValidator("Description must be between 3 and 1000 characters", 3, 1000))
-                .bind(Item::getDescription, Item::setDescription);
+                .bind(Product::getDescription, Product::setDescription);
 
-        image = new TextField("Image URL");
-        image.setRequired(true);
-        binder.forField(image);
-        formLayout.add(name,price,description,image);
+        category = new ComboBox<>("Category");
+        category.setItems("Clothing","Apparel","Shoes","Computers","Kitchen","Music","Movies","Hobbies","Pets");
+        category.setRequired(true);
+        category.setRequiredIndicatorVisible(true);
+        binder.forField(category).bind(Product::getCategory, Product::setCategory);
+
+        quantity = new TextField("Stock quantity");
+        quantity.setRequired(true);
+        quantity.setRequiredIndicatorVisible(true);
+        binder.forField(quantity).withConverter(new StringToIntegerConverter("Please enter a valid number"))
+                .withValidator(new IntegerRangeValidator("Quantity must be between 0 and 100", 0, 100))
+                .bind(Product::getQuantity, Product::setQuantity);
+
+
+
+        imageBuffer = new MemoryBuffer();
+        imageUpload = new Upload(imageBuffer);
+        imageUpload.setMaxFiles(1);
+        imageUpload.setAcceptedFileTypes("image/jpeg", "image/png");
+        imageUpload.setAutoUpload(true);
+        imageUpload.addSucceededListener(event -> {
+            try {
+                InputStream imageStream = imageBuffer.getInputStream();
+                File imageFile = new File(event.getFileName());
+                Files.copy(imageStream, imageFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                // Save the image file using the ImageUtils class
+               this.imageUrl = imageUtils.saveImageToFile(imageFile);
+               Image productImage = imageUtils.renderImage(this.imageUrl);
+               imageDiv.add(productImage);
+                // ...
+            } catch (IOException e) {
+                // Handle any exceptions related to file processing
+                e.printStackTrace();
+            }
+        });
+        imageDiv.add(imageUpload);
+        formLayout.add(name,price,description,category,imageDiv,quantity);
 
         cancelButton.addClickListener(e -> {
             UI.getCurrent().navigate(ItemListView.class);
@@ -125,26 +174,20 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
 
         saveButton.addClickListener(e -> {
             try {
-                if (this.item == null) {
-                    this.item = new Item();}
-                // Checks if the email is already in use
-                item.setUser(VaadinSession.getCurrent().getAttribute(Users.class));
-                /*if(price.getValue() == null)
+                if (this.product == null) {
+                    this.product = new Product();}
+                System.out.println("Setting owner");
+                product.setOwner(VaadinSession.getCurrent().getAttribute(Customer.class));
+
+                if(product.getImageUrl() == null)
                 {
-                    item.setPrice(5.0f);
+                    product.setImageUrl(this.imageUrl);
                 }
-                else {*/
-                    item.setPrice(Double.parseDouble(price.getValue()));
-                Notification.show(price.getValue());
-                item.setName(name.getValue());
-                item.setImageUrl(image.getValue());
-                item.setDescription(description.getValue());
-                if(item.getImageUrl() == null)
-                {
-                    item.setImageUrl("https://ichef.bbci.co.uk/news/976/cpsprodpb/A716/production/_95147724_kneeache.jpg");
-                }
-                binder.writeBean(this.item);
-                itemService.update(this.item);
+                System.out.println("Writing bean");
+                //product.printValues();
+                binder.writeBean(this.product);
+                System.out.println("Saving product to ontology");
+                productService.addProductToOntology(this.product);
                 UI.getCurrent().navigate(ItemListView.class);
                 Notification.show("Data updated");
                 UI.getCurrent().navigate(ItemListView.class);

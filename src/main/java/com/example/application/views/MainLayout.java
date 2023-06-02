@@ -3,17 +3,20 @@ package com.example.application.views;
 
 import com.example.application.components.appnav.AppNav;
 import com.example.application.components.appnav.AppNavItem;
-import com.example.application.data.entity.Users;
+import com.example.application.data.entity.Customer;
 import com.example.application.security.AuthService;
 import com.example.application.views.about.AboutView;
 import com.example.application.views.cardlist.CardListView;
 import com.example.application.views.checkoutform.CheckoutFormView;
+import com.example.application.views.customers.CustomerInfoView;
+import com.example.application.views.customers.CustomerInfoViewRedirect;
 import com.example.application.views.empty.EmptyView;
 import com.example.application.views.helloworld.HelloWorldView;
 import com.example.application.views.imagelist.ImageListView;
 import com.example.application.views.itemlist.ItemListView;
 import com.example.application.views.login.LoginView;
-import com.example.application.views.masterdetail.MasterDetailView;
+import com.example.application.views.logout.LogoutView;
+import com.example.application.views.orders.OrderView;
 import com.example.application.views.signup.SignUpView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -82,13 +85,13 @@ public class MainLayout extends AppLayout {
         nav.addItem(new AppNavItem("About", AboutView.class, "la la-file"));
         nav.addItem(new AppNavItem("Image List", ImageListView.class, "la la-th-list"));
         nav.addItem(new AppNavItem("Card List", CardListView.class, "la la-list"));
-        nav.addItem(new AppNavItem("Master-Detail", MasterDetailView.class, "la la-columns"));
         nav.addItem(new AppNavItem("Checkout Form", CheckoutFormView.class, "la la-credit-card"));
         nav.addItem(new AppNavItem("Empty", EmptyView.class, "la la-file"));
         nav.addItem(new AppNavItem("Sign-up", SignUpView.class, "la la-file"));
         nav.addItem(new AppNavItem("Items", ItemListView.class, "la la-globe"));
-        nav.addItem(new AppNavItem("Login", LoginView.class, "la la-globe"));
-
+        nav.addItem(new AppNavItem("Orders", OrderView.class, "la la-globe"));
+        nav.addItem(new AppNavItem("Logout", LogoutView.class, "la la-globe"));
+        nav.addItem(new AppNavItem("Profile Info",CustomerInfoView.class, "la la-globe"));
 
         return nav;
     }
@@ -111,8 +114,9 @@ public class MainLayout extends AppLayout {
     }
 
     private Component[] createRoutes(){
-       var user =  VaadinSession.getCurrent().getAttribute(Users.class);
-        return authService.getAuthorizedRoutes(user.getRole())
+       var customer =  VaadinSession.getCurrent().getAttribute(Customer.class);
+        //Add some sorf for authorization
+        return authService.getAuthorizedRoutes(1)
                 .stream()
                 .map(r -> createTab(r.name(),r.view()))
                 .toArray(Component[] ::new);

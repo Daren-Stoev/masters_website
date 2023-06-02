@@ -1,6 +1,10 @@
 package com.example.application;
 
-import com.example.application.data.service.SamplePersonRepository;
+import com.example.application.data.ontologies.CustomerOntology;
+import com.example.application.data.ontologies.ProductOntology;
+import com.example.application.data.services.CustomerService;
+import com.example.application.data.services.OrderService;
+import com.example.application.data.services.ProductService;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
@@ -26,12 +30,40 @@ import org.springframework.context.annotation.Bean;
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+            SpringApplication.run(Application.class, args);
+    }
+    @Bean
+    public CustomerOntology customerOntology() {
+        // Create and configure your CustomerOntology instance here
+        return new CustomerOntology();
     }
 
     @Bean
+    public ProductOntology productOntology() {
+        // Create and configure your CustomerOntology instance here
+        return new ProductOntology();
+    }
+    @Bean
+    public ProductService productService() {
+        return new ProductService();
+    }
+    @Bean
+    public OrderService orderService() {
+        // Create and configure your CustomerService instance here
+        return new OrderService();
+    }
+
+    @Bean
+    public CustomerService customerService() {
+        // Create and configure your CustomerService instance here
+        return new CustomerService();
+    }
+
+
+    /*
+    @Bean
     SqlDataSourceScriptDatabaseInitializer dataSourceScriptDatabaseInitializer(DataSource dataSource,
-            SqlInitializationProperties properties, SamplePersonRepository repository) {
+            SqlInitializationProperties properties, CustomerOntology customerOntology) {
         // This bean ensures the database is only initialized when empty
         return new SqlDataSourceScriptDatabaseInitializer(dataSource, properties) {
             @Override
@@ -43,4 +75,5 @@ public class Application implements AppShellConfigurator {
             }
         };
     }
+    */
 }

@@ -1,8 +1,8 @@
 package com.example.application.views.signup;
 
-import com.example.application.data.entity.Users;
-import com.example.application.data.service.UserService;
-import com.example.application.views.MainLayout;
+
+import com.example.application.data.entity.Customer;
+import com.example.application.data.services.CustomerService;
 import com.example.application.views.about.AboutView;
 import com.example.application.views.login.LoginView;
 import com.vaadin.flow.component.UI;
@@ -28,6 +28,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
+@Route("signup")
 @PageTitle("SignUp")
 //@Route(value = "signup/:UserID?/:action?(edit)", layout = MainLayout.class)
 @Uses(Icon.class)
@@ -36,23 +37,23 @@ public class SignUpView extends Div implements BeforeEnterObserver {
     private final String USER_ID = "UserID";
     private final String USER_EDIT_ROUTE_TEMPLATE = "signup/%s/edit";
 
-    private final Grid<Users> grid = new Grid<>(Users.class, false);
+    private final Grid<Customer> grid = new Grid<>(Customer.class, false);
 
     private TextField username;
     private PasswordField password;
     private TextField firstName;
     private TextField lastName;
     private TextField email;
-    private TextField role;
+    private TextField subscriptionType;
 
     private final Button cancel = new Button("Cancel");
     private final Button save = new Button("Save");
-    private final BeanValidationBinder<Users> binder;
-    private Users user;
-    private final UserService userService;
+    private final BeanValidationBinder<Customer> binder;
+    private Customer customer;
+    private final CustomerService customerService;
 
-    public SignUpView(UserService userService) {
-        this.userService = userService;
+    public SignUpView(CustomerService customerService) {
+        this.customerService = customerService;
         addClassNames("signup-view");
 
         // Create UI
@@ -65,7 +66,7 @@ public class SignUpView extends Div implements BeforeEnterObserver {
         add(horizontalLayout);
 
         // Configure Form
-        binder = new BeanValidationBinder<>(Users.class);
+        binder = new BeanValidationBinder<>(Customer.class);
 
         // Bind fields. This is where you'd define e.g. validation rules
 
@@ -78,22 +79,25 @@ public class SignUpView extends Div implements BeforeEnterObserver {
 
         save.addClickListener(e -> {
             try {
-                if (this.user == null) {
-                    this.user = new Users();}
+                if (this.customer == null) {
+                    this.customer = new Customer();}
                 // Checks if the email is already in use.
                 binder.forField(email)
                         // Explicit validator instance
                         .withValidator(new EmailValidator(
                                 "This doesn't look like a valid email address"))
-                        .bind(Users::getEmail, Users::setEmail);
-                if (userService.EmailsMatch(user))
-                {
-                    user = null;
-                    throw new Exception("This email is already in use");
-                }
-                if(user != null) {
-                    binder.writeBean(this.user);
-                    userService.update(this.user);
+                        .bind(Customer::getEmail, Customer::setEmail);
+                if(customer != null) {
+                    System.out.println(binder.getFields());
+                    binder.writeBean(this.customer);
+                    this.customer.setSubscriptionType("BasicTier");
+                    if (customerService.EmailAlreadyExists(customer))
+                    {
+                        throw new Exception("This email is already in use");
+                    }
+                    customer.printInfo();
+                    System.out.println("Customer");
+                    customerService.addCustomerToOntology(this.customer);
                     UI.getCurrent().navigate(LoginView.class);
                 }
                 clearForm();
@@ -128,8 +132,8 @@ public class SignUpView extends Div implements BeforeEnterObserver {
         firstName = new TextField("First Name");
         lastName = new TextField("Last Name");
         email = new TextField("Email");
-        role = new TextField("Role");
-        formLayout.add(username,password,firstName, lastName, email, role);
+        //subscriptionType = new TextField("Subscription Type");
+        formLayout.add(username,password,firstName, lastName, email);
 
         editorDiv.add(formLayout);
         createButtonLayout(editorLayoutDiv);
@@ -155,9 +159,9 @@ public class SignUpView extends Div implements BeforeEnterObserver {
         populateForm(null);
     }
 
-    private void populateForm(Users value) {
-        this.user = value;
-        binder.readBean(this.user);
+    private void populateForm(Customer customer) {
+        this.customer = customer;
+        binder.readBean(this.customer);
 
     }
 
