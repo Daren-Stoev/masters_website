@@ -1,5 +1,6 @@
 package com.example.application.views.login;
 
+import com.example.application.data.agents.ClientAgent;
 import com.example.application.security.AuthService;
 import com.example.application.views.itemlist.ItemListView;
 import com.example.application.views.signup.SignUpView;
@@ -12,6 +13,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import jade.wrapper.AgentContainer;
+import jade.core.ProfileImpl;
+import jade.core.Runtime;
 
 
 @Route("login")
@@ -20,8 +24,10 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 public class LoginView extends VerticalLayout {
 
     private final AuthService authService;
-    public LoginView(AuthService authService){
+    private final ClientAgent clientAgent;
+    public LoginView(AuthService authService, ClientAgent clientAgent){
         this.authService = authService;
+        this.clientAgent  = clientAgent;
         setId("login-view");
         addClassName("login-view");
         setSizeFull();
@@ -33,6 +39,9 @@ public class LoginView extends VerticalLayout {
         Button loginButton = new Button("Login");
         loginButton.addClickListener(e -> {
             try {
+                clientAgent.setCustomerEmail(emailField.getValue());
+                clientAgent.setup();
+                clientAgent.run();
                 authService.authenticate(emailField.getValue(),passwordField.getValue());
                 Notification.show("Hello ");
                 UI.getCurrent().navigate(ItemListView.class);
