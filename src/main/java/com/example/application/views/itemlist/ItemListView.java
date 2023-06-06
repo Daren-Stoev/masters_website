@@ -1,8 +1,8 @@
 package com.example.application.views.itemlist;
 
+import com.example.application.data.agents.ClientAgent;
 import com.example.application.data.entity.Customer;
 import com.example.application.data.entity.Product;
-import com.example.application.data.services.ProductService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
@@ -32,6 +32,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Padding;
 import com.vaadin.flow.theme.lumo.LumoUtility.TextColor;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -43,36 +44,49 @@ public class ItemListView extends Main implements HasComponents, HasStyle, Befor
     private final String ITEM_ID = "ItemID";
     private TextField searchBar;
     private Checkbox filter;
-    private ProductService productService;
-    private final Button createButton;
+    private Button createButton;
     private List<Product> products;
     private OrderedList productContainer;
+    private ClientAgent clientAgent;
+    public ItemListView() {
+        clientAgent = ClientAgent.getInstance();
+        List<Product> products = new ArrayList<>();
+        UI currentUI = UI.getCurrent();
+        clientAgent.getAllProductsFromOntology(products::addAll, () -> {
+            currentUI.access(() -> {
+                System.out.println("Products: " + products.size());
+                for (Product product : products) {
+                    System.out.println("Product " + product.getName());
+                }
+                filter = new Checkbox("Show only your items");
+                filter.addClickListener(e -> {
+                    clientAgent.getAllProductsFromOntology(products::addAll, () -> {
+                        fillContainer(products);
+                    });
+                });
+                searchBar = new TextField("Type here to search");
+                searchBar.addValueChangeListener(e -> {
+                    clientAgent.getProductStartWithNameFromOntology(searchBar.getValue(), products::addAll,
+                            () -> {
+                                fillContainer(products);
+                            });
+                });
+                createButton = new Button("Add item");
+                createButton.addClickListener(e -> {
+                    UI.getCurrent().navigate(ItemNewView.class);
+                });
+                add(searchBar, filter, createButton);
+                constructUI();
+                if (products != null) {
+                    for (Product product : products) {
+                        productContainer.add(new ItemListViewCard(product));
+                    }
+                }
+                // Don't forget to call UI.getCurrent().getSession().unlock() after making the changes
+                currentUI.getSession().unlock();
+            });
 
-    public ItemListView(ProductService productService) {
-        this.productService = productService;
-        products = productService.getAllProducts();
-        filter = new Checkbox("Show only your items");
-        filter.addClickListener(e -> {
-            products = productService.getAllProducts();
-            fillContainer(products);
         });
-        searchBar = new TextField("Type here to search");
-        searchBar.addValueChangeListener(e -> {
-            products = productService.findByNameStartsWithIgnoreCase(searchBar.getValue());
-            fillContainer(products);
-
-        });
-        createButton = new Button("Add item");
-        createButton.addClickListener(e ->
-        {
-            UI.getCurrent().navigate(ItemNewView.class);
-        });
-        add(searchBar,filter,createButton);
-        constructUI();
-        if (products != null){
-            for ( Product product : products) {
-                productContainer.add(new ItemListViewCard(product));
-            }}
     }
 
     private void constructUI() {
@@ -101,9 +115,9 @@ public class ItemListView extends Main implements HasComponents, HasStyle, Befor
             } else if (selectedSortOption.equals("Price")) {
                 products.sort(Comparator.comparing(Product::getPrice));
             } else if (selectedSortOption.equals("Newest first")) {
-                products = productService.getAllProducts();
+               //clientAgent.getAllProductsFromOntology(products::addAll);
             } else if (selectedSortOption.equals("Oldest first")) {
-                products = productService.getAllProducts();
+                //clientAgent.getAllProductsFromOntology(products::addAll);
             }
             fillContainer(products);
         });

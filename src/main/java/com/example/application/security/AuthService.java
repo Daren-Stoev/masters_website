@@ -37,20 +37,18 @@ public class AuthService {
     public AuthService(CustomerOntology customerOntology) {
         this.customerOntology = customerOntology;
     }
-    public void authenticate(String email, String password) throws AuthException{
+    public boolean authenticate(String email, String password,Customer customer) throws AuthException{
        // Users user = userService.findByUsername(username);
-        Customer customer = customerOntology.getCustomer(email);
+
 
         if(customer != null && customer.verifyPassword(password))
         {
             VaadinSession.getCurrent().setAttribute(Customer.class, customer);
             // Some service for admins i guess? I don't remember.'
             createRoutes(1);
+            return true;
         }
-        else {
-            throw new AuthException();
-            //createRoutes(user.getRole());
-        }
+        return false;
         //VaadinSession.getCurrent().setAttribute(Customer.class, customer);
         //createRoutes(dummy.getRole());
 

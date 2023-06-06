@@ -1,12 +1,12 @@
 package com.example.application.views.customers;
 
 
+import com.example.application.data.agents.ClientAgent;
 import com.example.application.data.entity.Customer;
 import com.example.application.data.entity.Order;
 import com.example.application.data.entity.Product;
 import com.example.application.data.services.CustomerService;
 import com.example.application.data.services.OrderService;
-import com.example.application.data.services.ProductService;
 import com.example.application.views.MainLayout;
 import com.example.application.views.orders.OrderView;
 import com.vaadin.flow.component.HasComponents;
@@ -33,23 +33,23 @@ public class CustomerInfoView extends Main implements HasComponents, HasUrlParam
 
     private Customer customer;
     
-    private CustomerService customerService;
-    
-    private ProductService productService;
+    private CustomerService customerService;;
     
     private OrderService  orderService;
+
+    private ClientAgent clientAgent;
     
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
         if (parameter == null) {
             parameter = VaadinSession.getCurrent().getAttribute(Customer.class).getEmail();
         }
+        clientAgent = ClientAgent.getInstance();
         customerService = new CustomerService();
         addClassNames("customer-info");
         customer = customerService.getCustomerByEmail(parameter);
         customer.printInfo();
         customerService = new CustomerService();
-        productService = new ProductService();
         orderService = new OrderService();
 
         VerticalLayout main = constructUI();
@@ -74,18 +74,24 @@ public class CustomerInfoView extends Main implements HasComponents, HasUrlParam
         Span email = new Span(customer.getEmail());
         customerInformationDiv.add(firstName,lastName,email);
         mainLayout.add(customerInformationDiv);
-
-        List<Product> products = productService.getProductsByCustomer(customer);
+        //Get products and orders for this customer
+        List<Product> products = new ArrayList<>();
+        clientAgent.getProductsByCustomerFromOntology(customer, products::addAll,
+                () -> {
+                    Span productsSpan = new Span("Products: " + products.size());
+                    mainLayout.add(productsSpan);
+                });
         List<Order> orders = orderService.getOrdersByCustomer(customer);
+        //List<Order> orders = new ArrayList<>();
+        //clientAgent.getOrdersByCustomerFromOntology(customer, orderList -> orders.addAll(orderList));
 
-        Span productsSpan = new Span("Products: " + products.size());
 
         Span ordersSpan = new Span("Orders: " + orders.size());
         Button ordersButton = new Button("See all Orders");
         ordersButton.addClickListener(e -> {
             UI.getCurrent().navigate(OrderView.class);
         });
-        mainLayout.add(productsSpan, ordersSpan, ordersButton);
+        mainLayout.add(ordersSpan, ordersButton);
 
         Button editButton = new Button("Edit");
         editButton.addClickListener(e -> {

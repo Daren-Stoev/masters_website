@@ -1,11 +1,13 @@
 package com.example.application.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.semanticweb.owlapi.model.IRI;
 
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Customer {
     private String username;
     private String email;
@@ -19,7 +21,7 @@ public class Customer {
     public Customer(String username,String password, String email,String subscriptionType,String firstName,String lastName) {
         this.username = username;
         this.email = email;
-        setPassword(password);
+        generatePassword(password);
         this.subscriptionType = subscriptionType;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -57,8 +59,11 @@ public class Customer {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void generatePassword(String password){
         // Generate a random salt value
         if(this.password_salt == null) {
             this.password_salt = generateSalt();
@@ -139,7 +144,9 @@ public class Customer {
 
         byte[] hashedPasswordToCheck = hashPassword(passwordToCheck, this.password_salt);
         byte[] storedPasswordBytes = hexToBytes(this.password);
-
+        System.out.println("SALT" + bytesToHex(this.password_salt));
+        System.out.println(bytesToHex(hashedPasswordToCheck));
+        System.out.println(bytesToHex(storedPasswordBytes));
         return constantTimeComparison(hashedPasswordToCheck, storedPasswordBytes);
     }
 
@@ -177,6 +184,7 @@ public class Customer {
         System.out.println("Username: " + getUsername());
         System.out.println("Email: " + getEmail());
         System.out.println("Password: " + getPassword());
+        //System.out.println("PasswordSalt: " + getPassword_saltAsString());
         System.out.println("Subscription Type: " + getSubscriptionType());
         System.out.println("First Name: " + getFirstName());
         System.out.println("Last Name: " + getLastName());

@@ -1,6 +1,7 @@
 package com.example.application.views.signup;
 
 
+import com.example.application.data.agents.ClientAgent;
 import com.example.application.data.entity.Customer;
 import com.example.application.data.services.CustomerService;
 import com.example.application.views.about.AboutView;
@@ -51,9 +52,11 @@ public class SignUpView extends Div implements BeforeEnterObserver {
     private final BeanValidationBinder<Customer> binder;
     private Customer customer;
     private final CustomerService customerService;
+    private final ClientAgent clientAgent;
 
     public SignUpView(CustomerService customerService) {
         this.customerService = customerService;
+        clientAgent = ClientAgent.getInstance();
         addClassNames("signup-view");
 
         // Create UI
@@ -87,6 +90,7 @@ public class SignUpView extends Div implements BeforeEnterObserver {
                         .withValidator(new EmailValidator(
                                 "This doesn't look like a valid email address"))
                         .bind(Customer::getEmail, Customer::setEmail);
+                binder.forField(password).bind(Customer::getPassword, Customer::generatePassword);
                 if(customer != null) {
                     System.out.println(binder.getFields());
                     binder.writeBean(this.customer);
@@ -97,7 +101,7 @@ public class SignUpView extends Div implements BeforeEnterObserver {
                     }
                     customer.printInfo();
                     System.out.println("Customer");
-                    customerService.addCustomerToOntology(this.customer);
+                    clientAgent.addCustomerToOntology(customer);
                     UI.getCurrent().navigate(LoginView.class);
                 }
                 clearForm();

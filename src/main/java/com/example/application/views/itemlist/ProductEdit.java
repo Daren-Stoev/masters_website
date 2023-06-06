@@ -1,9 +1,9 @@
 package com.example.application.views.itemlist;
 
+import com.example.application.data.agents.ClientAgent;
 import com.example.application.data.entity.Customer;
 import com.example.application.data.entity.ImageUtils;
 import com.example.application.data.entity.Product;
-import com.example.application.data.services.ProductService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.UI;
@@ -60,27 +60,28 @@ public class ProductEdit extends Main implements HasComponents, HasUrlParameter<
     private Product product;
     @NotNull
     private  Product originalProduct;
-    private ProductService productService;
+    private ClientAgent clientAgent;
     @Override
     public void setParameter(BeforeEvent event, String productId) {
 
-        this.productService = new ProductService();
+        clientAgent = ClientAgent.getInstance();
         addClassNames("item-info-view");
-        originalProduct = productService.getProductById(productId);
-
-        SplitLayout splitLayout = new SplitLayout();
-        HorizontalLayout horizontalLayout = new HorizontalLayout();
-
-
-        binder = new BeanValidationBinder<>(Product.class);
-
-        binder.bindInstanceFields(this);
-
-        //createGridLayout(horizontalLayout);
-        createEditorLayout(horizontalLayout,originalProduct);
+        clientAgent.getProductFromOntology(productId,fetchedProduct -> originalProduct = fetchedProduct,
+                () ->{
+                    SplitLayout splitLayout = new SplitLayout();
+                    HorizontalLayout horizontalLayout = new HorizontalLayout();
 
 
-        add(horizontalLayout);
+                    binder = new BeanValidationBinder<>(Product.class);
+
+                    binder.bindInstanceFields(this);
+
+                    //createGridLayout(horizontalLayout);
+                    createEditorLayout(horizontalLayout,originalProduct);
+
+
+                    add(horizontalLayout);});
+
 
     }
     private void createEditorLayout(HorizontalLayout horizontalLayoutLayout,Product originalProduct) {
@@ -182,7 +183,7 @@ public class ProductEdit extends Main implements HasComponents, HasUrlParameter<
                 binder.writeBean(this.product);
                 System.out.println("Saving product to ontology");
 
-                productService.updateProduct(this.product);
+                clientAgent.updateProduct(this.product);
                 UI.getCurrent().navigate(ProductInfoView.class,product.getId());
                 Notification.show("Data updated");
 

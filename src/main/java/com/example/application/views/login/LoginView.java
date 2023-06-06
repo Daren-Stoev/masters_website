@@ -13,9 +13,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import jade.wrapper.AgentContainer;
-import jade.core.ProfileImpl;
-import jade.core.Runtime;
+
 
 
 @Route("login")
@@ -25,9 +23,10 @@ public class LoginView extends VerticalLayout {
 
     private final AuthService authService;
     private final ClientAgent clientAgent;
-    public LoginView(AuthService authService, ClientAgent clientAgent){
+
+    public LoginView(AuthService authService) {
         this.authService = authService;
-        this.clientAgent  = clientAgent;
+        clientAgent = ClientAgent.getInstance();
         setId("login-view");
         addClassName("login-view");
         setSizeFull();
@@ -38,24 +37,43 @@ public class LoginView extends VerticalLayout {
         PasswordField passwordField = new PasswordField("Password");
         Button loginButton = new Button("Login");
         loginButton.addClickListener(e -> {
-            try {
-                clientAgent.setCustomerEmail(emailField.getValue());
-                clientAgent.setup();
-                clientAgent.run();
-                authService.authenticate(emailField.getValue(),passwordField.getValue());
-                Notification.show("Hello ");
-                UI.getCurrent().navigate(ItemListView.class);
-            } catch (AuthService.AuthException ex) {
-                System.out.println(ex);
-                Notification.show(emailField.getValue() + " | " + passwordField.getValue());
-            }
-        });
+            UI ui = UI.getCurrent();
+            System.out.println(clientAgent);
+            System.out.println(clientAgent.getName());
+            clientAgent.setCustomerEmail(emailField.getValue());
+            clientAgent.getCustomerFromOntology(emailField.getValue(), customer -> {
+                if (customer != null) {
+                    System.out.println("Received customer In Login View: " + customer);
+                    customer.printInfo();
 
+                        ui.access(() -> {
+                            try {
+                                Boolean authenticated = authService.authenticate(emailField.getValue(), passwordField.getValue(),customer);
+                                if (authenticated) {
+                                    ui.navigate(ItemListView.class);
+                                    Notification.show("Hello");
+                                }
+                                else {
+                                    Notification.show(emailField.getValue() + " | " + passwordField.getValue());
+                                }
+
+                        }
+                            catch (Exception ex) {
+                                System.out.println(ex);
+                                Notification.show(emailField.getValue() + " | " + passwordField.getValue());
+                            }});
+                } else {
+                    // Handle case when customer is not found
+                    System.out.println("Customer not found");
+                    Notification.show("Customer not found");
+                }
+            });
+        });
 
         Button signUpButton = new Button("Sign up");
         signUpButton.addClickListener(e -> {
             UI.getCurrent().navigate(SignUpView.class);
         });
-        add(new H1("Login"),emailField,passwordField,loginButton,signUpButton);
+        add(new H1("Login"), emailField, passwordField, loginButton, signUpButton);
     }
 }

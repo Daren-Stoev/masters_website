@@ -71,6 +71,10 @@ public class ProductOntology {
         }
     }
 
+    public void refreshOntology(){
+        reasoner.flush();
+    }
+
     public void addProduct(Product product) {
 
         OWLClass productClass = dataFactory.getOWLClass(IRI.create(ontologyIRIStr + "Product"));
@@ -309,7 +313,6 @@ public class ProductOntology {
         saveOntology();
         reasoner.flush();
     }
-
 
 
 

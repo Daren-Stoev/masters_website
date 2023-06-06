@@ -1,9 +1,10 @@
 package com.example.application.views.customers;
 
 import ch.qos.logback.core.subst.NodeToStringTransformer;
+import com.example.application.data.agents.ClientAgent;
+import com.example.application.data.agents.CustomerAgent;
 import com.example.application.data.entity.Customer;
 import com.example.application.data.entity.Product;
-import com.example.application.data.services.CustomerService;
 import com.example.application.views.MainLayout;
 import com.example.application.views.login.LoginView;
 import com.vaadin.flow.component.HasComponents;
@@ -48,14 +49,17 @@ public class CustomerEdit extends Main implements HasComponents, HasUrlParameter
     private Customer customer;
     @NotNull
     private Customer originalCustomer;
-    private CustomerService customerService;
+
+    private ClientAgent clientAgent;
 
 
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
 
-        customerService = new CustomerService();
-        originalCustomer = customerService.getCustomerByEmail(parameter);
+
+        clientAgent = ClientAgent.getInstance();
+
+        originalCustomer = VaadinSession.getCurrent().getAttribute(Customer.class);
 
 
         SplitLayout splitLayout = new SplitLayout();
@@ -89,7 +93,7 @@ public class CustomerEdit extends Main implements HasComponents, HasUrlParameter
                 .bind(Customer::getUsername,Customer::setUsername);
         password = new PasswordField("Password");
         password.setRequired(true);
-        binder.forField(password).bind(Customer::getPassword,Customer::setPassword);
+        binder.forField(password).bind(Customer::getPassword,Customer::generatePassword);
         firstName = new TextField("First Name");
         firstName.setValue(originalCustomer.getFirstName());
         firstName.setRequired(true);
@@ -132,8 +136,8 @@ public class CustomerEdit extends Main implements HasComponents, HasUrlParameter
                customer = new Customer();
                binder.writeBean(customer);
                customer.setPassword_saltFromString(originalCustomer.getPassword_saltAsString());
-               customer.setPassword(password.getValue());
-               customerService.updateCustomer(customer);
+               customer.generatePassword(password.getValue());
+              clientAgent.updateCustomer(customer);
                UI.getCurrent().navigate(CustomerInfoView.class,customer.getEmail());
                Notification.show("Profile info has been updated successfully");
            }
@@ -145,7 +149,7 @@ public class CustomerEdit extends Main implements HasComponents, HasUrlParameter
         });
         deleteButton.addClickListener(e -> {
             try {
-                customerService.deleteCustomer(this.customer);
+                clientAgent.deleteCustomer(originalCustomer);
                 UI.getCurrent().navigate(LoginView.class);
                 Notification.show("Profile info has been deleted successfully");
             } catch (Exception exp) {

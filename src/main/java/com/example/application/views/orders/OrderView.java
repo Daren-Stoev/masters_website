@@ -1,11 +1,11 @@
 package com.example.application.views.orders;
 
+import com.example.application.data.agents.ClientAgent;
 import com.example.application.data.entity.Customer;
 import com.example.application.data.entity.ImageUtils;
 import com.example.application.data.entity.Order;
 import com.example.application.data.entity.Product;
 import com.example.application.data.services.OrderService;
-import com.example.application.data.services.ProductService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasStyle;
@@ -47,11 +47,12 @@ public class OrderView extends Main implements HasComponents, HasStyle, BeforeEn
 
     private TextField searchBar;
     private Checkbox filter;
-    private ProductService productService = new ProductService();
     private OrderService orderService = new OrderService();
 
-    public OrderView(ProductService productService,OrderService orderService) {
-        this.productService = productService;
+    private ClientAgent clientAgent;
+
+    public OrderView(OrderService orderService) {
+        clientAgent = ClientAgent.getInstance();
         this.orderService = orderService;
         Tab personalOrdersTab = generateTable("Orders",true,"");
         Tab yourProductsTab = generateTable("Your Products",false,"");
@@ -121,15 +122,17 @@ public class OrderView extends Main implements HasComponents, HasStyle, BeforeEn
             if (searchQuery != null && !searchQuery.isEmpty())
             {
                 List<Product> products = orders.stream().map(Order::getProduct).collect(Collectors.toList());
-                products = productService.filterByNameContainsIgnoreCase(products,searchQuery);
+                products = filterByNameContainsIgnoreCase(products,searchQuery);
                 List<Product> finalProducts = products;
                 orders = orders.stream().filter(order -> finalProducts.contains(order.getProduct())).collect(Collectors.toList());
             }
         }
         // We fetch all products that this user has uploaded and then get all orders with each product
         else {
-            List<Product> products = this.productService.getProductsByCustomer(VaadinSession.getCurrent().getAttribute((Customer.class)));
-            products = productService.filterByNameContainsIgnoreCase(products,searchQuery);
+            List<Product> products = new ArrayList<>();
+            clientAgent.getProductsByCustomerFromOntology(VaadinSession.getCurrent().getAttribute((Customer.class)), products::addAll,
+                    () -> {});
+            products = filterByNameContainsIgnoreCase(products,searchQuery);
             for(Product product : products) {
                 ArrayList<Order> productOrders = orderService.getOrdersByProduct(product);
                 orders.addAll(productOrders);
@@ -152,5 +155,19 @@ public class OrderView extends Main implements HasComponents, HasStyle, BeforeEn
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
 
+    }
+
+    public List<Product> filterByNameContainsIgnoreCase(List<Product> products,String value) {
+
+        //filter by name
+        List<Product> filteredProducts = new ArrayList<Product>();
+
+        for (Product product : products) {
+            if (product.getName().toLowerCase().startsWith(value.toLowerCase())) {
+                filteredProducts.add(product);
+            }
+        }
+
+        return filteredProducts;
     }
 }

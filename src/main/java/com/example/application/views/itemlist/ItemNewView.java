@@ -1,9 +1,9 @@
 package com.example.application.views.itemlist;
 
+import com.example.application.data.agents.ClientAgent;
 import com.example.application.data.entity.Customer;
 import com.example.application.data.entity.ImageUtils;
 import com.example.application.data.entity.Product;
-import com.example.application.data.services.ProductService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -32,7 +32,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.data.provider.ListDataProvider;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
 import java.io.File;
@@ -41,16 +40,11 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-import static com.helger.commons.mock.CommonsAssert.assertEquals;
 
 @PageTitle("Item-new")
 @Route(value = "item-new", layout = MainLayout.class)
 @Uses(Icon.class)
 public class ItemNewView extends Div implements BeforeEnterObserver {
-
-
-    //private final Grid<Users> grid = new Grid<>(Users.class, false);
-
 
     private TextField name;
     private TextArea description;
@@ -66,10 +60,10 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
     private  final Button saveButton = new Button("Save");
     private final BeanValidationBinder<Product> binder;
     private Product product;
-    private final ProductService productService;
+    private ClientAgent clientAgent;
 
-    public ItemNewView(ProductService productService) {
-        this.productService = productService;
+    public ItemNewView() {
+        clientAgent = ClientAgent.getInstance();
         addClassNames("item-new-view");
 
         // Create UI
@@ -187,7 +181,7 @@ public class ItemNewView extends Div implements BeforeEnterObserver {
                 //product.printValues();
                 binder.writeBean(this.product);
                 System.out.println("Saving product to ontology");
-                productService.addProductToOntology(this.product);
+                clientAgent.addProductToOntology(product);
                 UI.getCurrent().navigate(ItemListView.class);
                 Notification.show("Data updated");
                 UI.getCurrent().navigate(ItemListView.class);

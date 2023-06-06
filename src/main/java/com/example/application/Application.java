@@ -1,6 +1,9 @@
 package com.example.application;
 
+import ch.qos.logback.core.net.server.Client;
 import com.example.application.data.agents.ClientAgent;
+import com.example.application.data.agents.CustomerAgent;
+import com.example.application.data.agents.ProductAgent;
 import com.example.application.data.ontologies.CustomerOntology;
 import com.example.application.data.ontologies.ProductOntology;
 import com.example.application.data.services.CustomerService;
@@ -18,15 +21,14 @@ import jade.core.Runtime;
 
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
-import jade.wrapper.StaleProxyException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer;
 import org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 
 /**
  * The entry point of the Spring Boot application.
@@ -41,13 +43,6 @@ import org.springframework.context.annotation.Lazy;
 @NpmPackage(value = "@vaadin-component-factory/vcf-nav", version = "1.0.6")
 public class Application implements AppShellConfigurator {
 
-    //private final AgentContainer agentContainer;
-
-    //@Autowired
-    //private Runtime runtime;
-
-
-
     public static void main(String[] args) {
         Runtime rt = Runtime.instance();
 
@@ -60,20 +55,32 @@ public class Application implements AppShellConfigurator {
         AgentContainer mainContainer =
                 rt.createMainContainer(profile);
 
+        if (mainContainer == null)
+        {
+            System.err.println("Error creating agent container");
+            return;
+        }
+
+
+
         try {
-            AgentController ag = mainContainer.createNewAgent("Client",
-                    "com.example.application.data.agents.ClientAgent", null);
+            //TestAgent.setUp((TestAgent) mainContainer.createNewAgent("ClientAgent", "com.example.application.data.agents.ClientAgent", new Object[0]));
+            //AgentController clientAgent = mainContainer.createNewAgent("ClientAgent", "com.example.application.data.agents.ClientAgent", new Object[0]);
+            //ClientAgent.setInstance((ClientAgent) mainContainer.createNewAgent("ClientAgent", "com.example.application.data.agents.ClientAgent", new Object[0]));
+            //AgentController customerAgent = mainContainer.createNewAgent("CustomerAgent", "com.example.application.data.agents.CustomerAgent", new Object[0]);
 
-            AgentController ag2 = mainContainer.createNewAgent("Customer",
-                    "com.example.application.data.agents.CustomerAgent", null);
-
-            ag.start();
-            ag2.start();
-
-        } catch (StaleProxyException e) {
-            // TODO Auto-generated catch block
+            mainContainer.acceptNewAgent("ClientAgent", ClientAgent.getInstance());
+            mainContainer.getAgent("ClientAgent").start();
+            mainContainer.acceptNewAgent("CustomerAgent", CustomerAgent.getInstance());
+            mainContainer.getAgent("CustomerAgent").start();
+            mainContainer.acceptNewAgent("ProductAgent", ProductAgent.getInstance());
+            mainContainer.getAgent("ProductAgent").start();
+            // Set the instance of the ClientAgent
+           // ClientAgent.setInstance((ClientAgent) clientAgent.getO2AInterface(ClientAgent.class));
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
         // run the Spring Boot application
         SpringApplication.run(Application.class, args);
     }
@@ -109,25 +116,25 @@ public class Application implements AppShellConfigurator {
         return new CustomerService();
     }
 
+/*
     @Bean
-    @Autowired
-    public AgentContainer agentContainer() {
-        ProfileImpl profile = new ProfileImpl();
-        profile.setParameter(ProfileImpl.MAIN_HOST, "localhost");
-        AgentContainer agentContainer = runtime().createMainContainer(profile);
-        try {
-            //agentContainer.acceptNewAgent("clientAgent", new ClientAgent(agentContainer));
-            agentContainer.acceptNewAgent("clientAgent", new ClientAgent());
-        } catch (StaleProxyException e) {
-            throw new RuntimeException(e);
-        }
-        return agentContainer;
+    public CommandLineRunner startJadeContainer() {
+        return args -> {
+            JadeContainer jadeContainer = new JadeContainer();
+            jadeContainer.startContainer();
+        };
     }
+ */
+
+
+/*
     @Bean
-    public ClientAgent appClientAgent(AgentContainer agentContainer) {
+    public ClientAgent clientAgent() {
         //return new ClientAgent(agentContainer);
-        return new ClientAgent();
-    }
+       return ClientAgent.getInstance();
+    }*/
+
+
 
 
 

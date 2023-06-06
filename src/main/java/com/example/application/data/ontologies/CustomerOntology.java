@@ -155,6 +155,9 @@ public class CustomerOntology {
 
         return null;  // Subscription type not found
     }
+    public void refreshOntology(){
+        reasoner.flush();
+    }
 
     public void updateCustomer(Customer customer) {
         IRI customerIRI = customer.getIndividualIRI(ontologyIRIStr);

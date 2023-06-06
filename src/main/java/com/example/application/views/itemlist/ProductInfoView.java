@@ -1,10 +1,10 @@
 package com.example.application.views.itemlist;
 
+import com.example.application.data.agents.ClientAgent;
 import com.example.application.data.entity.Customer;
 import com.example.application.data.entity.Order;
 import com.example.application.data.entity.Product;
 import com.example.application.data.services.OrderService;
-import com.example.application.data.services.ProductService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.UI;
@@ -31,58 +31,62 @@ public class ProductInfoView extends Main implements HasComponents,HasUrlParamet
     private String productId;
 
     private Product product;
-    private ProductService productService;
     private OrderService orderService;
 
     private Order order;
 
+    private ClientAgent clientAgent;
+
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
         this.productId = parameter;
-        productService = new ProductService();
-        product = productService.getProductById(productId);
-        constructUI();
-        Button buyButton = new Button("Buy");
-        Button editButton = new Button("Edit");
-        Button reportButton = new Button("Report");
-        Button deleteButton = new Button("Delete");
-        Button backButton = new Button("Back");
+        clientAgent = ClientAgent.getInstance();
+        clientAgent.getProductFromOntology(productId, product1 -> product = product1,
+                () -> {
+
+                    constructUI();
+                    Button buyButton = new Button("Buy");
+                    Button editButton = new Button("Edit");
+                    Button reportButton = new Button("Report");
+                    Button deleteButton = new Button("Delete");
+                    Button backButton = new Button("Back");
 
 
-        // Add click listeners to the buttons
-        buyButton.addClickListener(e -> {
-            orderService = new OrderService();
-            Customer orderCustomer = VaadinSession.getCurrent().getAttribute(Customer.class);
-            order = new Order(product,orderCustomer);
-            orderService.AddOrder(order);
-            Notification.show("Product Added To Cart");
-        });
+                    // Add click listeners to the buttons
+                    buyButton.addClickListener(e -> {
+                        orderService = new OrderService();
+                        Customer orderCustomer = VaadinSession.getCurrent().getAttribute(Customer.class);
+                        order = new Order(product,orderCustomer);
+                        orderService.AddOrder(order);
+                        Notification.show("Product Added To Cart");
+                    });
 
-        editButton.addClickListener(e -> {
-            UI.getCurrent().navigate(ProductEdit.class, product.getId());
-        });
+                    editButton.addClickListener(e -> {
+                        UI.getCurrent().navigate(ProductEdit.class, product.getId());
+                    });
 
-        reportButton.addClickListener(e -> {
-            // Handle report button click
-        });
+                    reportButton.addClickListener(e -> {
+                        // Handle report button click
+                    });
 
-        backButton.addClickListener(e -> {
-            UI.getCurrent().navigate(ItemListView.class);
-        });
-        deleteButton.addClickListener(e -> {
-            productService.deleteProduct(product);
-            Notification.show("Product Deleted");
-            UI.getCurrent().navigate(ItemListView.class);
-        });
+                    backButton.addClickListener(e -> {
+                        UI.getCurrent().navigate(ItemListView.class);
+                    });
+                    deleteButton.addClickListener(e -> {
+                        clientAgent.deleteProduct(product);
+                        Notification.show("Product Deleted");
+                        UI.getCurrent().navigate(ItemListView.class);
+                    });
 
-        if(product.getOwner().getEmail().
-                equals(
-                        (VaadinSession.getCurrent().getAttribute(Customer.class)).getEmail())) {
-            add(editButton, deleteButton, backButton);
-        }
-        else {
-            add(buyButton, reportButton, backButton);
-        }
+                    if(product.getOwner().getEmail().
+                            equals(
+                                    (VaadinSession.getCurrent().getAttribute(Customer.class)).getEmail())) {
+                        add(editButton, deleteButton, backButton);
+                    }
+                    else {
+                        add(buyButton, reportButton, backButton);
+                    }
+                });
     }
 
     private void constructUI() {
